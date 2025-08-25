@@ -1,5 +1,11 @@
 # @xiaoqianshuo/eslint-config
 
+## 1.2.0
+
+### Minor Changes
+
+- fix:update
+
 ## 1.1.0
 
 ### Minor Changes
