@@ -1,0 +1,45 @@
+{
+  "private": true,
+  "name": "xiaoqianshuo",
+  "author": {
+    "name": "xiaoqianshuo",
+    "email": "xiaoqianshuo@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaoqianshuo/xiaoqianshuo.git"
+  },
+  "homepage": "http://xiaoqianshuo.work/",
+  "scripts": {
+    "build": "pnpm -r build",
+    "build:prod": "pnpm -r build:prod",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.29.6",
+    "@rollup/plugin-commonjs": "28.0.6",
+    "@rollup/plugin-json": "6.1.0",
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-terser": "0.4.4",
+    "@rollup/plugin-typescript": "12.1.4",
+    "@types/jest": "30.0.0",
+    "@types/node": "24.3.0",
+    "@xiaoqianshuo/cli": "workspace:^",
+    "@xiaoqianshuo/eslint-config": "workspace:^",
+    "@xiaoqianshuo/prettier-config": "workspace:^",
+    "eslint": "9.33.0",
+    "jest": "30.0.5",
+    "jest-environment-jsdom": "30.0.5",
+    "prettier": "3.6.2",
+    "rimraf": "6.0.1",
+    "rollup": "4.46.2",
+    "ts-jest": "29.4.1",
+    "tslib": "2.8.1",
+    "tsx": "4.20.4",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@10.12.1"
+}

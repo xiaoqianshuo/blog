@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "@xiaoqianshuo/cli",
+  "version": "1.0.1",
+  "description": "cli",
+  "type": "module",
+  "bin": {
+    "test": "./dist/commands/test.js",
+    "xiaoqianshuo": "./dist/commands/xiaoqianshuo.js"
+  },
+  "scripts": {
+    "build": "rimraf dist && rollup -c"
+  },
+  "keywords": [
+    "xiaoqianshuo",
+    "cli"
+  ],
+  "author": "xiaoqianshuo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaoqianshuo/xiaoqianshuo.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://qlqs.work:4873",
+    "tag": "latest"
+  }
+}

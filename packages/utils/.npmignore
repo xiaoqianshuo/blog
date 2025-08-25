@@ -1,0 +1,16 @@
+# 忽略不需要发布到 npm 的文件和目录
+node_modules/
+dist/*.map
+types/*.map
+src/
+.vscode/
+.github/
+prettier.config.js
+eslintrc.config.js
+rollup.config.js
+tsconfig.json
+.git/
+.gitignore
+publish.sh
+.npmignore
+.npmrc

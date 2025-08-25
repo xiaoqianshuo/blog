@@ -1,0 +1,46 @@
+{
+  "name": "@xiaoqianshuo/utils",
+  "version": "1.1.0",
+  "description": "utils",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "browser": "./dist/umd/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "browser": "./dist/umd/index.js"
+    },
+    "./*": {
+      "import": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js"
+    }
+  },
+  "scripts": {
+    "build:rollup": "rimraf dist && rollup -c",
+    "build:types": "rimraf types && tsc -p tsconfig.types.json",
+    "build": "pnpm build:rollup && pnpm build:types",
+    "build:prod": "NODE_ENV=production pnpm build:rollup && pnpm build:types",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'",
+    "test": "jest"
+  },
+  "keywords": [
+    "xiaoqianshuo",
+    "utils"
+  ],
+  "author": "xiaoqianshuo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaoqianshuo/xiaoqianshuo.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://qlqs.work:4873",
+    "tag": "latest"
+  }
+}

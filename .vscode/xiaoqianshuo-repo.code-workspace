@@ -1,0 +1,44 @@
+{
+  "folders": [
+    {
+      "name": "workspace",
+      "path": "..",
+    },
+    {
+      "name": "prettier-config",
+      "path": "../packages/config/prettier",
+    },
+    {
+      "name": "eslint-config",
+      "path": "../packages/config/eslint",
+    },
+    {
+      "name": "cli",
+      "path": "../packages/cli",
+    },
+    {
+      "name": "utils",
+      "path": "../packages/utils",
+    },
+    {
+      "name": "react-ui",
+      "path": "../packages/ui/react",
+    },
+    {
+      "name": "vue-ui",
+      "path": "../packages/ui/vue",
+    },
+    {
+      "name": "frontend",
+      "path": "../apps/frontend",
+    },
+    {
+      "name": "backend",
+      "path": "../apps/backend",
+    },
+  ],
+  "settings": {
+    "cSpell.words": ["nodenext", "npmignore", "qlqs", "rollup", "xiaoqianshuo"],
+    "prettier.configPath": "prettier.config.js",
+  },
+}

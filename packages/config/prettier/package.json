@@ -1,0 +1,32 @@
+{
+  "name": "@xiaoqianshuo/prettier-config",
+  "version": "1.0.1",
+  "description": "prettier config",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "build:prod": "rimraf dist && tsc",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/xiaoqianshuo/xiaoqianshuo.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://qlqs.work:4873",
+    "tag": "latest"
+  },
+  "keywords": [
+    "xiaoqianshuo",
+    "prettier",
+    "config"
+  ],
+  "author": "xiaoqianshuo",
+  "license": "MIT",
+  "peerDependencies": {
+    "prettier": ">=3.6.2"
+  }
+}

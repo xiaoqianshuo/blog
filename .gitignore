@@ -1,0 +1,15 @@
+*.log*
+.DS_Store
+build/
+dist/
+node_modules
+
+**.d.ts
+**.map
+
+# jest
+reports/
+coverage/
+
+## IDE
+.idea/
