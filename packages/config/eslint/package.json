@@ -18,7 +18,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
