@@ -1,12 +1,12 @@
 import js from '@eslint/js'; // 引入 ESLint 的基础配置
-import type { Linter } from 'eslint';
 import globals from 'globals'; // 引入常见的全局变量定义，如浏览器和 Node.js
 import eslintConfigPrettier from 'eslint-config-prettier'; // 引入 Prettier 的 ESLint 配置，避免与 Prettier 冲突
 import { flatConfigs as importConfigs } from 'eslint-plugin-import'; // 引入 ESLint 的 import 插件，提供更好的 import 语法检查
 import unusedImports from 'eslint-plugin-unused-imports';
+import type { Config } from '@eslint/config-helpers';
 import { defineConfig, globalIgnores } from '@eslint/config-helpers';
 
-export function baseConfig(envs: ('browser' | 'node')[] = ['browser', 'node']): Linter.Config[] {
+export function baseConfig(envs: ('browser' | 'node')[] = ['browser', 'node']): Config[] {
   const mergedGlobals = {
     ...(envs.includes('browser') ? globals.browser : {}),
     ...(envs.includes('node') ? globals.node : {}),
