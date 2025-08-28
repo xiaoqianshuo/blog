@@ -1,7 +1,6 @@
 import tseslint from 'typescript-eslint'; // 引入 TypeScript 的 ESLint 配置
 import type { ConfigArray } from 'typescript-eslint';
 import { flatConfigs as importConfigs } from 'eslint-plugin-import'; // 引入 ESLint 的 import 插件，提供更好的 import 语法检查
-import unusedImports from 'eslint-plugin-unused-imports';
 
 export function tsConfig(): ConfigArray {
   return tseslint.config({
@@ -15,9 +14,6 @@ export function tsConfig(): ConfigArray {
         project: ['./tsconfig.eslint.json', './tsconfig.json'], // 使用 TypeScript 配置文件
         tsconfigRootDir: process.cwd(),
       },
-    },
-    plugins: {
-      'unused-imports': unusedImports,
     },
     extends: [
       tseslint.configs.recommended, // 使用 TypeScript 推荐的 ESLint 配置
