@@ -1,4 +1,4 @@
-import { error } from 'console';
+import { error } from 'node:console';
 import { TaskQueue } from '../src/taskQueue';
 
 describe('TaskQueue', () => {

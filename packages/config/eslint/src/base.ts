@@ -59,6 +59,8 @@ export function baseConfig(envs: ('browser' | 'node')[] = ['browser', 'node']): 
         'key-spacing': ['error', { beforeColon: false, afterColon: true }], // 强制对象字面量的冒号后有空格
         'space-infix-ops': 'error', // 强制操作符周围有空格
         'no-duplicate-imports': ['error', { allowSeparateTypeImports: true }], // 禁止重复的 import
+
+        'import/enforce-node-protocol-usage': ['error', 'always'], // 强制内置节点导入使用该node:协议
         'import/no-unresolved': 'off', // 允许无法解析的 import
         'import/no-named-as-default': 'error', // 禁止将命名导入作为默认导入
         'import/no-commonjs': 'error', // 强制使用 ES6 模块语法（如果你在使用 ESLint 插件 eslint-plugin-import）

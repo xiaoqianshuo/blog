@@ -27,6 +27,8 @@ export function tsConfig(): ConfigArray {
       '@typescript-eslint/explicit-function-return-type': 'off', // 允许不显式指定返回类型
       '@typescript-eslint/explicit-module-boundary-types': 'off', // 允许不显式指定模块边界类型
       '@typescript-eslint/no-duplicate-type-constituents': 'error', // 禁止重复的类型组成部分
+      '@typescript-eslint/no-useless-constructor': ['error'], // 禁止无用的构造函数
+      '@typescript-eslint/no-empty-interface': 'error', // 禁止空接口
       '@typescript-eslint/consistent-type-exports': 'error', // 强制类型导出的一致性
       '@typescript-eslint/consistent-type-imports': [
         'error',

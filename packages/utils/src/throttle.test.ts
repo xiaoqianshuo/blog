@@ -1,3 +1,4 @@
+import { log } from 'node:console';
 import { groupThrottle, groupThrottleAsync, throttle, throttleAsync } from './throttle';
 
 /**
@@ -6,7 +7,7 @@ import { groupThrottle, groupThrottleAsync, throttle, throttleAsync } from './th
 function throttleExample() {
   const baseThrottle = throttle(
     (args: string) => {
-      console.log(`throttle${args}`);
+      log(`throttle${args}`);
     },
     2000,
     {
@@ -26,7 +27,7 @@ function throttleExample() {
 function throttleAsyncExample() {
   const baseThrottleAsync = throttleAsync(
     async (args: string) => {
-      console.log(`throttleAsync${args}`);
+      log(`throttleAsync${args}`);
       await new Promise(resolve => setTimeout(resolve, 1000)); // 模拟异步操作
     },
     2000,
@@ -49,7 +50,7 @@ function groupThrottleExample() {
   // 按 key 分组同步节流函数示例
   const sendRequest = groupThrottle<string, [string]>(
     (userId, action) => {
-      console.log(`用户 ${userId} 执行了 ${action} - ${new Date().toISOString()}`);
+      log(`用户 ${userId} 执行了 ${action} - ${new Date().toISOString()}`);
     },
     2000,
     {
@@ -74,7 +75,7 @@ function groupThrottleAsyncExample() {
   // 按 key 分组异步节流函数示例
   const fetchData = groupThrottleAsync<string, [number]>(
     async (userId, id) => {
-      console.log(`用户 ${userId} 请求数据 ${id} - ${new Date().toISOString()}`);
+      log(`用户 ${userId} 请求数据 ${id} - ${new Date().toISOString()}`);
       await new Promise(res => setTimeout(res, 500)); // 模拟异步请求
     },
     2000,
