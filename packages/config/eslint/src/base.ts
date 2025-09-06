@@ -14,9 +14,11 @@ export function baseConfig(envs: ('browser' | 'node')[] = ['browser', 'node']): 
 
   return defineConfig(
     globalIgnores([
-      'build/',
-      'dist/',
-      'node_modules/',
+      '**/dist/**',
+      '**/dist-ssr/**',
+      '**/coverage/**',
+      '**/build/**',
+      '**/node_modules/**',
       '**/*.min.js',
       '**/eslint.config.js',
       '**/rollup.config.js',
