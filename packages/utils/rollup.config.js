@@ -38,6 +38,7 @@ export default defineConfig({
       preserveModules: true,
       preserveModulesRoot: 'src',
       sourcemap: true,
+      entryFileNames: '[name].cjs',
     },
     {
       dir: './dist/umd',
