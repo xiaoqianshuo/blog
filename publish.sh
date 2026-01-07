@@ -1,3 +1,3 @@
 #!/bin/sh
-pnpm build
+pnpm build:prod
 pnpm -r publish
