@@ -2,49 +2,50 @@
   "folders": [
     {
       "name": "workspace",
-      "path": ".",
+      "path": "."
     },
     {
       "name": "prettier-config",
-      "path": "./packages/config/prettier",
+      "path": "./packages/config/prettier"
     },
     {
       "name": "eslint-config",
-      "path": "./packages/config/eslint",
+      "path": "./packages/config/eslint"
     },
     {
       "name": "cli",
-      "path": "./packages/cli",
+      "path": "./packages/cli"
     },
     {
       "name": "utils",
-      "path": "./packages/utils",
+      "path": "./packages/utils"
     },
     {
       "name": "react-ui",
-      "path": "./packages/ui/react",
+      "path": "./packages/ui/react"
     },
     {
       "name": "vue-ui",
-      "path": "./packages/ui/vue",
-    },
-    {
-      "name": "frontend",
-      "path": "./apps/frontend",
-    },
-    {
-      "name": "backend",
-      "path": "./apps/backend",
-    },
+      "path": "./packages/ui/vue"
+    }
   ],
   "settings": {
-    "cSpell.words": ["nodenext", "npmignore", "qlqs", "rollup", "xiaoqianshuo"],
+    "cSpell.words": [
+      "esbenp",
+      "nodenext",
+      "npmignore",
+      "oxlint",
+      "qlqs",
+      "rollup",
+      "xiaoqianshuo"
+    ],
     "prettier.configPath": "prettier.config.js",
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
       "tsconfig.json": "tsconfig.*.json, env.d.ts",
       "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
       "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .prettier*, prettier*, .editorconfig",
+      "*.cjs": "${capture}.cjs.map"
     },
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
