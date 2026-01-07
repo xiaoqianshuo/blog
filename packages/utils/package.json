@@ -1,7 +1,8 @@
 {
   "name": "@xiaoqianshuo/utils",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "utils",
+  "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "browser": "./dist/umd/index.js",
@@ -9,12 +10,12 @@
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
+      "require": "./dist/cjs/index.cjs",
       "browser": "./dist/umd/index.js"
     },
     "./*": {
       "import": "./dist/esm/*.js",
-      "require": "./dist/cjs/*.js"
+      "require": "./dist/cjs/*.cjs"
     }
   },
   "scripts": {

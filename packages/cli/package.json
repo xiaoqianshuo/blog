@@ -1,8 +1,9 @@
 {
   "private": true,
   "name": "@xiaoqianshuo/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "cli",
+  "type": "module",
   "bin": {
     "test": "./dist/commands/test.js",
     "xiaoqianshuo": "./dist/commands/xiaoqianshuo.js"
