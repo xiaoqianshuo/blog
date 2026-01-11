@@ -1,9 +1,9 @@
 {
   "name": "@xiaoqianshuo/utils",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "utils",
   "type": "module",
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
   "browser": "./dist/umd/index.js",
   "types": "./types/index.d.ts",

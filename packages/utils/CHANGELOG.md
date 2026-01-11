@@ -1,5 +1,11 @@
 # @xiaoqianshuo/utils
 
+## 1.2.3
+
+### Patch Changes
+
+- 81c5827: fix: 修复了一个配置
+
 ## 1.2.2
 
 ### Patch Changes
