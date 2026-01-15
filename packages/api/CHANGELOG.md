@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.1.1
+
+### Patch Changes
+
+- e56eb4f: fix: 依赖调整
+
 ## 0.1.0
 
 ### Minor Changes
