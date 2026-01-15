@@ -25,3 +25,4 @@ jest.config.js
 CHANGELOG.md
 
 dist/modules/
+tsup.config.ts

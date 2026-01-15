@@ -49,6 +49,7 @@
       "oxlint",
       "qlqs",
       "rollup",
+      "tsup",
       "xiaoqianshuo"
     ],
     "prettier.configPath": "prettier.config.js",
