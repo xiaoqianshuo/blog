@@ -4,10 +4,30 @@
 
 ```typescript
 import z from 'zod';
-import { CreateUser, User } from '@xiaoqianshuo/types';
 import { BaseApi } from '@xiaoqianshuo/api';
 import { ApiModule } from '@xiaoqianshuo/api';
 import { Injectable } from '@xiaoqianshuo/api';
+
+export const UserId = z.uuid().brand<'UserId'>();
+export type UserId = z.infer<typeof UserId>;
+
+export const User = z.object({
+  id: UserId,
+  email: z.email(),
+  name: z.string().min(1),
+  detail: z.object({
+    age: z.number().int().min(0).optional(),
+    gender: z.enum(['male', 'female']).optional(),
+  }),
+});
+export type User = z.infer<typeof User>;
+
+export const CreateUser = User.pick({
+  email: true,
+  name: true,
+  detail: true,
+});
+export type CreateUser = z.infer<typeof CreateUser>;
 
 interface IUserApi {
   listUsers(): Promise<User[]>;

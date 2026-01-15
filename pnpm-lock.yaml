@@ -138,9 +138,6 @@ importers:
       '@xiaoqianshuo/types':
         specifier: workspace:^
         version: link:../types
-      prettier:
-        specifier: '>=3.6.2'
-        version: 3.6.2
       reflect-metadata:
         specifier: 0.2.2
         version: 0.2.2
@@ -207,9 +204,6 @@ importers:
       '@xiaoqianshuo/prettier-config':
         specifier: workspace:^
         version: link:../config/prettier
-      prettier:
-        specifier: '>=3.6.2'
-        version: 3.6.2
 
   packages/ui/react: {}
 
