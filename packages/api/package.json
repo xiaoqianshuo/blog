@@ -1,0 +1,45 @@
+{
+  "name": "@xiaoqianshuo/api",
+  "version": "0.0.1",
+  "description": "api",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./*": {
+      "import": "./dist/modules/*.js",
+      "require": "./dist/modules/*.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup --minify",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'"
+  },
+  "dependencies": {
+    "@xiaoqianshuo/types": "workspace:^",
+    "reflect-metadata": "0.2.2"
+  },
+  "devDependencies": {
+    "@xiaoqianshuo/prettier-config": "workspace:^"
+  },
+  "keywords": [
+    "xiaoqianshuo",
+    "api"
+  ],
+  "author": "xiaoqianshuo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaoqianshuo/xiaoqianshuo.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://qlqs.work:4873",
+    "tag": "latest"
+  }
+}

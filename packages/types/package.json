@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "version": "0.0.1",
+  "description": "types",
+  "name": "@xiaoqianshuo/types",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup --minify",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "keywords": [
+    "xiaoqianshuo",
+    "types"
+  ],
+  "author": "xiaoqianshuo",
+  "license": "MIT",
+  "dependencies": {
+    "@xiaoqianshuo/prettier-config": "workspace:^"
+  }
+}
