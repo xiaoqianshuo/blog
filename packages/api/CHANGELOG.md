@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.2.2
+
+### Patch Changes
+
+- f3c10ca: fix: 修改generateApiClient --> apis 配置为其他值，系统检测不到的bug
+
 ## 0.2.1
 
 ### Patch Changes
