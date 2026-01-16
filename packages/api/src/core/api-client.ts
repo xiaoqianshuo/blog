@@ -32,14 +32,24 @@ export function generateApiClient<T extends ApiTree>(config: {
 }): ApiClientTree<T> {
   const build = (apis: ApiTree): any => {
     if (typeof apis === 'function') {
-      return new apis(config.baseUrl, config.requestAdapter);
+      // 检查是否为 API 类
+      if (apis.prototype instanceof BaseApi) {
+        return new apis(config.baseUrl, config.requestAdapter);
+      } else {
+        throw new Error(`Invalid API class: ${apis.name}, it must extend \`BaseApi\``);
+      }
     }
 
-    const obj: Record<string, any> = {};
-    for (const key in apis) {
-      obj[key] = build(apis[key]);
+    // 递归处理对象类型的 API 树
+    if (typeof apis === 'object' && apis !== null) {
+      const obj: Record<string, any> = {};
+      for (const key in apis) {
+        obj[key] = build(apis[key]);
+      }
+      return obj;
     }
-    return obj;
+
+    throw new Error(`Invalid API tree structure: ${JSON.stringify(apis)}`);
   };
 
   return build(config.apis);
