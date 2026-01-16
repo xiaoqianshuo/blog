@@ -2,7 +2,7 @@
 import 'reflect-metadata';
 
 import { generateApiClient } from './core/api-client';
-import { RequestAdapter, RequestConfig } from './adapters/request.adapter';
+import { RequestAdapter } from './adapters/request.adapter';
 import { Injectable } from './decorators/di.decorator';
 import { ApiModule } from './decorators/api-module.decorator';
 import { BaseApi } from './core/base-api';
