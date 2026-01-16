@@ -1,5 +1,12 @@
 # @xiaoqianshuo/web
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [2218b97]
+  - @xiaoqianshuo/api@0.2.0
+
 ## 0.2.0
 
 ### Minor Changes

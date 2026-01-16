@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.2.0
+
+### Minor Changes
+
+- 2218b97: feat: 支持树形apis配置
+
 ## 0.1.1
 
 ### Patch Changes
