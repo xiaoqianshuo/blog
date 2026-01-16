@@ -38,6 +38,13 @@
     "type": "git",
     "url": "https://github.com/xiaoqianshuo/xiaoqianshuo.git"
   },
+  "files": [
+    "dist",
+    "!dist/**/*.map",
+    "types",
+    "LICENSE",
+    "README.md"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "http://qlqs.work:4873",

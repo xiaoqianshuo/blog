@@ -24,6 +24,11 @@
     "type": "git",
     "url": "git+ssh://git@github.com/xiaoqianshuo/xiaoqianshuo.git"
   },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "http://qlqs.work:4873",
