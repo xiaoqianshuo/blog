@@ -1,5 +1,11 @@
 # @xiaoqianshuo/utils
 
+## 1.2.5
+
+### Patch Changes
+
+- 9e5ba50: fix: 配置修改
+
 ## 1.2.4
 
 ### Patch Changes

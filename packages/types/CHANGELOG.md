@@ -1,5 +1,11 @@
 # @xiaoqianshuo/types
 
+## 0.2.1
+
+### Patch Changes
+
+- 9e5ba50: fix: 配置修改
+
 ## 0.2.0
 
 ### Minor Changes

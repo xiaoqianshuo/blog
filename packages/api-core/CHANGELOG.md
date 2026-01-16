@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.2
+
+### Patch Changes
+
+- 9e5ba50: fix: 配置修改
+
 ## 0.3.1
 
 ### Patch Changes
