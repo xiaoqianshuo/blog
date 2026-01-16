@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.0
+
+### Minor Changes
+
+- a791d51: feat: 拆包调整
+
 ## 0.2.2
 
 ### Patch Changes
