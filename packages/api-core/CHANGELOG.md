@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.1
+
+### Patch Changes
+
+- a40e5e3: fix: update README.md
+
 ## 0.3.0
 
 ### Minor Changes
