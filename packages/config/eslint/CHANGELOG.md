@@ -1,5 +1,11 @@
 # @xiaoqianshuo/eslint-config
 
+## 1.2.3
+
+### Patch Changes
+
+- 4ffa462: fix: 调整一些配置
+
 ## 1.2.2
 
 ### Patch Changes

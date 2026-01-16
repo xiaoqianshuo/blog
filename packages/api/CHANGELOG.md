@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.2.1
+
+### Patch Changes
+
+- 4ffa462: fix: 调整一些配置
+
 ## 0.2.0
 
 ### Minor Changes

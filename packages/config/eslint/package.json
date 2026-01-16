@@ -1,6 +1,6 @@
 {
   "name": "@xiaoqianshuo/eslint-config",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "eslint config",
   "type": "module",
   "main": "./dist/index.cjs.js",
