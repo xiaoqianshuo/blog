@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@xiaoqianshuo/api": "workspace:^",
+    "@xiaoqianshuo/api-v1": "workspace:^",
     "@xiaoqianshuo/types": "workspace:^",
     "next": "16.1.1",
     "react": "19.2.3",

@@ -1,8 +1,6 @@
 import z from 'zod';
 import { CreateUser, User } from '@xiaoqianshuo/types';
-import { BaseApi } from '../core/base-api';
-import { ApiModule } from '../decorators/api-module.decorator';
-import { Injectable } from '../decorators/di.decorator';
+import { ApiModule, BaseApi, Injectable } from '@xiaoqianshuo/api-core';
 
 interface IUserApi {
   listUsers(): Promise<User[]>;
@@ -28,3 +26,5 @@ export class UserApi extends BaseApi implements IUserApi {
     return await this.post('', user, User);
   }
 }
+
+export const userApi = new UserApi('http://localhost:3000/api');

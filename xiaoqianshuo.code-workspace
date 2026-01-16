@@ -17,8 +17,12 @@
       "path": "packages/types"
     },
     {
-      "name": "api",
-      "path": "packages/api"
+      "name": "api-core",
+      "path": "packages/api-core"
+    },
+    {
+      "name": "api-v1",
+      "path": "packages/api-v1"
     },
     {
       "name": "utils",

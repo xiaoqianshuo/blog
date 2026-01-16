@@ -24,6 +24,7 @@
   "author": "xiaoqianshuo",
   "license": "MIT",
   "dependencies": {
-    "@xiaoqianshuo/prettier-config": "workspace:^"
+    "@xiaoqianshuo/prettier-config": "workspace:^",
+    "zod": "4.3.5"
   }
 }

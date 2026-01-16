@@ -4,9 +4,9 @@
 
 ```typescript
 import z from 'zod';
-import { BaseApi } from '@xiaoqianshuo/api';
-import { ApiModule } from '@xiaoqianshuo/api';
-import { Injectable } from '@xiaoqianshuo/api';
+import { BaseApi } from '@xiaoqianshuo/api-core';
+import { ApiModule } from '@xiaoqianshuo/api-core';
+import { Injectable } from '@xiaoqianshuo/api-core';
 
 export const UserId = z.uuid().brand<'UserId'>();
 export type UserId = z.infer<typeof UserId>;
@@ -58,7 +58,7 @@ export class UserApi extends BaseApi implements IUserApi {
 ### 生成 API 客户端实例
 
 ```typescript
-import { generateApiClient } from '@xiaoqianshuo/api';
+import { generateApiClient } from '@xiaoqianshuo/api-core';
 import { UserApi } from './user.api';
 
 export const requestApi = generateApiClient({
@@ -78,5 +78,11 @@ import { requestApi } from './api.client';
 requestApi.user.listUsers().then(console.log);
 
 // 创建新用户
-requestApi.user.createUser({ name: 'XiaoQianShuo' }).then(console.log);
+requestApi.user
+  .createUser({
+    email: 'xiaoqianshuo@example.com',
+    name: 'XiaoQianShuo',
+    detail: { age: 25, gender: 'male' },
+  })
+  .then(console.log);
 ```
