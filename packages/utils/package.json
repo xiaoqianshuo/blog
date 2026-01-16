@@ -3,19 +3,30 @@
   "version": "1.2.4",
   "description": "utils",
   "type": "module",
-  "main": "./dist/cjs/index.cjs",
+  "main": "./dist/esm/index.js",
   "module": "./dist/esm/index.js",
   "browser": "./dist/umd/index.js",
   "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.cjs",
-      "browser": "./dist/umd/index.js"
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
     },
     "./*": {
-      "import": "./dist/esm/*.js",
-      "require": "./dist/cjs/*.cjs"
+      "import": {
+        "types": "./types/*.d.ts",
+        "default": "./dist/esm/*.js"
+      },
+      "require": {
+        "types": "./types/*.d.ts",
+        "default": "./dist/cjs/*.cjs"
+      }
     }
   },
   "scripts": {
