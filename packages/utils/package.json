@@ -1,13 +1,16 @@
 {
   "name": "@xiaoqianshuo/utils",
   "version": "1.2.5",
-  "description": "utils",
   "type": "module",
-  "main": "./dist/esm/index.js",
+  "license": "MIT",
+  "author": "xiaoqianshuo",
+  "description": "utils for xiaoqianshuo",
+  "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
   "browser": "./dist/umd/index.js",
   "types": "./types/index.d.ts",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": {
         "types": "./types/index.d.ts",
@@ -43,8 +46,6 @@
     "xiaoqianshuo",
     "utils"
   ],
-  "author": "xiaoqianshuo",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/xiaoqianshuo/xiaoqianshuo.git"
@@ -54,7 +55,8 @@
     "!dist/**/*.map",
     "types",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "package.json"
   ],
   "publishConfig": {
     "access": "public",

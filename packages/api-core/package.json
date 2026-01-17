@@ -1,19 +1,22 @@
 {
   "name": "@xiaoqianshuo/api-core",
   "version": "0.3.2",
-  "description": "api core",
+  "author": "xiaoqianshuo",
+  "description": "api core for xiaoqianshuo",
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.cjs",
+  "types": "dist/index.d.cts",
   "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/index.d.ts",
+        "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
     }
@@ -23,12 +26,12 @@
     "build:prod": "rimraf dist && tsup --minify",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'"
   },
+  "peerDependencies": {
+    "zod": "^4"
+  },
   "dependencies": {
     "reflect-metadata": "0.2.2",
     "zod": "^4.3.5"
-  },
-  "peerDependencies": {
-    "zod": "^4"
   },
   "devDependencies": {
     "@xiaoqianshuo/prettier-config": "workspace:^"
@@ -37,8 +40,6 @@
     "xiaoqianshuo",
     "api-core"
   ],
-  "author": "xiaoqianshuo",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/xiaoqianshuo/xiaoqianshuo.git"
@@ -46,7 +47,8 @@
   "files": [
     "dist",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "package.json"
   ],
   "publishConfig": {
     "access": "public",
