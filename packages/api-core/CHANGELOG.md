@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.3
+
+### Patch Changes
+
+- 0503a54: fix: update package.json config
+
 ## 0.3.2
 
 ### Patch Changes

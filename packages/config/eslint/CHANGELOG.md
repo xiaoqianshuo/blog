@@ -1,5 +1,11 @@
 # @xiaoqianshuo/eslint-config
 
+## 1.2.4
+
+### Patch Changes
+
+- 0503a54: fix: update package.json config
+
 ## 1.2.3
 
 ### Patch Changes

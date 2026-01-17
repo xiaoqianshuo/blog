@@ -1,5 +1,11 @@
 # @xiaoqianshuo/utils
 
+## 1.2.6
+
+### Patch Changes
+
+- 0503a54: fix: update package.json config
+
 ## 1.2.5
 
 ### Patch Changes
