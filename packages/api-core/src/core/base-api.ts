@@ -24,6 +24,10 @@ export class BaseApi {
       throw new Error('Request adapter is not provided');
     }
 
+    if (!config.schema) {
+      throw new Error('Schema is required');
+    }
+
     // 拼接模块基础 URL + 接口路径
     let finalUrl = joinMultiplePaths(this.baseUrl, config.url);
 
@@ -40,80 +44,233 @@ export class BaseApi {
 
   /**
    * 通用 GET 请求方法
-   * @param path 接口路径（会自动拼接模块基础 URL）
-   * @param params 查询参数
+   * @param path 接口路径
    * @param schema 响应数据校验 schema
-   * @param headers 请求头
+   */
+  protected get<T>(path: string, schema: z.ZodType<T>): Promise<T>;
+  /**
+   * 通用 GET 请求方法
+   * @param config 包含路径、查询参数、校验 schema、请求头的配置对象
+   * @param config.path 接口路径
+   * @param config.params 查询参数
+   * @param config.schema 响应数据校验 schema
+   * @param config.headers 请求头
    * @returns 解析后的响应数据
    */
+  protected get<T>(config: {
+    path: string;
+    schema: z.ZodType<T>;
+    params?: Record<string, string>;
+    headers?: Headers;
+  }): Promise<T>;
   protected get<T>(
-    path: string,
-    params: Record<string, string>,
-    schema: z.ZodType<T>,
-    headers?: Headers,
+    config:
+      | {
+          path: string;
+          schema: z.ZodType<T>;
+          params?: Record<string, string>;
+          headers?: Headers;
+        }
+      | string,
+    schema?: z.ZodType<T>,
   ) {
-    return this.request({ url: path, method: 'GET', params, schema, headers });
+    if (typeof config === 'string') {
+      config = {
+        path: config,
+        schema: schema!,
+      };
+    }
+    return this.request({
+      method: 'GET',
+      url: config.path,
+      schema: config.schema,
+      params: config.params,
+      headers: config.headers,
+    });
   }
 
   /**
    * 通用 POST 请求方法
-   * @param path 接口路径（会自动拼接模块基础 URL）
-   * @param body 请求体数据
+   * @param path 接口路径
    * @param schema 响应数据校验 schema
-   * @param headers 请求头
+   */
+  protected post<T>(path: string, schema: z.ZodType<T>): Promise<T>;
+  /**
+   * 通用 POST 请求方法
+   * @param config 包含路径、请求体、校验 schema、请求头的配置对象
+   * @param config.path 接口路径
+   * @param config.body 请求体数据
+   * @param config.schema 响应数据校验 schema
+   * @param config.headers 请求头
    * @returns 解析后的响应数据
    */
+  protected post<T>(config: {
+    path: string;
+    schema: z.ZodType<T>;
+    body?: Record<string, unknown>;
+    headers?: Headers;
+  }): Promise<T>;
   protected post<T>(
-    path: string,
-    body: Record<string, unknown>,
-    schema: z.ZodType<T>,
-    headers?: Headers,
+    config:
+      | {
+          path: string;
+          schema: z.ZodType<T>;
+          body?: Record<string, unknown>;
+          headers?: Headers;
+        }
+      | string,
+    schema?: z.ZodType<T>,
   ) {
-    return this.request({ url: path, method: 'POST', schema, data: body, headers });
+    if (typeof config === 'string') {
+      config = {
+        path: config,
+        schema: schema!,
+      };
+    }
+    return this.request({
+      method: 'POST',
+      url: config.path,
+      schema: config.schema,
+      data: config.body,
+      headers: config.headers,
+    });
   }
 
   /**
    * 通用 PUT 请求方法
-   * @param path 接口路径（会自动拼接模块基础 URL）
-   * @param body 请求体数据
+   * @param path 接口路径
    * @param schema 响应数据校验 schema
-   * @param headers 请求头
+   */
+  protected put<T>(path: string, schema: z.ZodType<T>): Promise<T>;
+  /**
+   * 通用 PUT 请求方法
+   * @param config 包含路径、请求体、校验 schema、请求头的配置对象
+   * @param config.path 接口路径
+   * @param config.body 请求体数据
+   * @param config.schema 响应数据校验 schema
+   * @param config.headers 请求头
    * @returns 解析后的响应数据
    */
+  protected put<T>(config: {
+    path: string;
+    schema: z.ZodType<T>;
+    body?: Record<string, unknown>;
+    headers?: Headers;
+  }): Promise<T>;
   protected put<T>(
-    path: string,
-    body: Record<string, unknown>,
-    schema: z.ZodType<T>,
-    headers?: Headers,
+    config:
+      | {
+          path: string;
+          schema: z.ZodType<T>;
+          body?: Record<string, unknown>;
+          headers?: Headers;
+        }
+      | string,
+    schema?: z.ZodType<T>,
   ) {
-    return this.request({ url: path, method: 'PUT', schema, data: body, headers });
+    if (typeof config === 'string') {
+      config = {
+        path: config,
+        schema: schema!,
+      };
+    }
+    return this.request({
+      method: 'PUT',
+      url: config.path,
+      schema: config.schema,
+      data: config.body,
+      headers: config.headers,
+    });
   }
 
   /**
    * 通用 PATCH 请求方法
-   * @param path 接口路径（会自动拼接模块基础 URL）
-   * @param body 请求体数据
+   * @param path 接口路径
    * @param schema 响应数据校验 schema
-   * @param headers 请求头
+   */
+  protected patch<T>(path: string, schema: z.ZodType<T>): Promise<T>;
+  /**
+   * 通用 PATCH 请求方法
+   * @param config 包含路径、请求体、校验 schema、请求头的配置对象
+   * @param config.path 接口路径
+   * @param config.body 请求体数据
+   * @param config.schema 响应数据校验 schema
+   * @param config.headers 请求头
    * @returns 解析后的响应数据
    */
+  protected patch<T>(config: {
+    path: string;
+    schema: z.ZodType<T>;
+    body?: Record<string, unknown>;
+    headers?: Headers;
+  }): Promise<T>;
   protected patch<T>(
-    path: string,
-    body: Record<string, unknown>,
-    schema: z.ZodType<T>,
-    headers?: Headers,
+    config:
+      | {
+          path: string;
+          schema: z.ZodType<T>;
+          body?: Record<string, unknown>;
+          headers?: Headers;
+        }
+      | string,
+    schema?: z.ZodType<T>,
   ) {
-    return this.request({ url: path, method: 'PATCH', schema, data: body, headers });
+    if (typeof config === 'string') {
+      config = {
+        path: config,
+        schema: schema!,
+      };
+    }
+    return this.request({
+      method: 'PATCH',
+      url: config.path,
+      schema: config.schema,
+      data: config.body,
+      headers: config.headers,
+    });
   }
 
   /**
    * 通用 DELETE 请求方法
-   * @param path 接口路径（会自动拼接模块基础 URL）
+   * @param path 接口路径
    * @param schema 响应数据校验 schema
-   * @param headers 请求头
    * @returns 解析后的响应数据
    */
-  protected delete<T>(path: string, schema: z.ZodType<T>, headers?: Headers) {
-    return this.request({ url: path, method: 'DELETE', schema, headers });
+  protected delete<T>(path: string, schema: z.ZodType<T>): Promise<T>;
+  /**
+   * 通用 DELETE 请求方法
+   * @param config 包含路径、校验 schema、请求头的配置对象
+   * @param config.path 接口路径
+   * @param config.schema 响应数据校验 schema
+   * @param config.headers 请求头
+   * @returns 解析后的响应数据
+   */
+  protected delete<T>(config: {
+    path: string;
+    schema: z.ZodType<T>;
+    headers?: Headers;
+  }): Promise<T>;
+  protected delete<T>(
+    config:
+      | {
+          path: string;
+          schema: z.ZodType<T>;
+          headers?: Headers;
+        }
+      | string,
+    schema?: z.ZodType<T>,
+  ) {
+    if (typeof config === 'string') {
+      config = {
+        path: config,
+        schema: schema!,
+      };
+    }
+    return this.request({
+      method: 'DELETE',
+      url: config.path,
+      schema: config.schema,
+      headers: config.headers,
+    });
   }
 }

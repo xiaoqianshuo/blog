@@ -15,15 +15,19 @@ interface IUserApi {
 @ApiModule('/user')
 export class UserApi extends BaseApi implements IUserApi {
   async listUsers() {
-    return await this.get('', {}, z.array(User));
+    return await this.get('', z.array(User));
   }
 
   async getUser(userId: string) {
-    return await this.get(`/${userId}`, {}, User);
+    return await this.get(`/${userId}`, User);
   }
 
   async createUser(user: CreateUser) {
-    return await this.post('', user, User);
+    return await this.post({
+      path: '',
+      schema: User,
+      body: user,
+    });
   }
 }
 
