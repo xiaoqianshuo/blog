@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.4
+
+### Patch Changes
+
+- 2c31e41: 🐞 fix(fetch adapter): 修复请求失败的bug
+
 ## 0.3.3
 
 ### Patch Changes
