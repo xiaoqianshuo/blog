@@ -50,7 +50,7 @@ export class BaseApi {
     path: string,
     params: Record<string, string>,
     schema: z.ZodType<T>,
-    headers?: Record<string, string>,
+    headers?: Headers,
   ) {
     return this.request({ url: path, method: 'GET', params, schema, headers });
   }
@@ -67,7 +67,7 @@ export class BaseApi {
     path: string,
     body: Record<string, unknown>,
     schema: z.ZodType<T>,
-    headers?: Record<string, string>,
+    headers?: Headers,
   ) {
     return this.request({ url: path, method: 'POST', schema, data: body, headers });
   }
@@ -84,7 +84,7 @@ export class BaseApi {
     path: string,
     body: Record<string, unknown>,
     schema: z.ZodType<T>,
-    headers?: Record<string, string>,
+    headers?: Headers,
   ) {
     return this.request({ url: path, method: 'PUT', schema, data: body, headers });
   }
@@ -101,7 +101,7 @@ export class BaseApi {
     path: string,
     body: Record<string, unknown>,
     schema: z.ZodType<T>,
-    headers?: Record<string, string>,
+    headers?: Headers,
   ) {
     return this.request({ url: path, method: 'PATCH', schema, data: body, headers });
   }
@@ -113,7 +113,7 @@ export class BaseApi {
    * @param headers 请求头
    * @returns 解析后的响应数据
    */
-  protected delete<T>(path: string, schema: z.ZodType<T>, headers?: Record<string, string>) {
+  protected delete<T>(path: string, schema: z.ZodType<T>, headers?: Headers) {
     return this.request({ url: path, method: 'DELETE', schema, headers });
   }
 }
