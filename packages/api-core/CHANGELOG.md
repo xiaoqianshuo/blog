@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.6
+
+### Patch Changes
+
+- 4fee7d0: fix: 调整入参方式
+
 ## 0.3.5
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @xiaoqianshuo/api-v1
 
+## 0.1.2
+
+### Patch Changes
+
+- 4fee7d0: fix: 调整入参方式
+- Updated dependencies [4fee7d0]
+  - @xiaoqianshuo/api-core@0.3.6
+
 ## 0.1.1
 
 ### Patch Changes
