@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.5
+
+### Patch Changes
+
+- 0a9fe3d: fix: bug修改
+
 ## 0.3.4
 
 ### Patch Changes
