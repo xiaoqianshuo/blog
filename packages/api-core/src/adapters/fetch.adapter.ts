@@ -10,10 +10,7 @@ export class FetchRequestAdapter extends RequestAdapter {
       `${config.url}${config.params ? `?${new URLSearchParams(config.params).toString()}` : ''}`,
       {
         method: config.method,
-        headers: {
-          'Content-Type': 'application/json',
-          ...new Headers(config.headers),
-        },
+        headers: config.headers,
         body: config.data ? JSON.stringify(config.data) : undefined,
       },
     );
