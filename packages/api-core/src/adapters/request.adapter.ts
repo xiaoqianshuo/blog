@@ -9,7 +9,7 @@ export interface RequestConfig<T = unknown> {
   schema: z.ZodType<T>;
   params?: Record<string, string>; // URL 参数
   data?: Record<string, unknown>; // 请求体
-  headers?: Record<string, string>; // 请求头
+  headers?: Headers; // 请求头
   [key: string]: unknown; // 兼容其他自定义配置
 }
 

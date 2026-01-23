@@ -12,11 +12,14 @@ export class FetchRequestAdapter extends RequestAdapter {
         method: config.method,
         headers: {
           'Content-Type': 'application/json',
-          ...config.headers,
+          ...new Headers(config.headers),
         },
         body: config.data ? JSON.stringify(config.data) : undefined,
       },
     );
-    return response.json();
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
   }
 }

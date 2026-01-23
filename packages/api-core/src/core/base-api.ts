@@ -1,21 +1,7 @@
 import z from 'zod';
 import { RequestAdapter, RequestConfig } from '../adapters/request.adapter';
 import { joinMultiplePaths } from '../utils/path';
-
-/**
- * 解析 API 响应数据
- * @param data 响应结果对象
- * @param schema 用于解析响应数据的 Zod 模式
- * @returns 解析后的响应数据
- */
-async function parse<T>(data: T, schema: z.ZodType<T>): Promise<T> {
-  const parsed = schema.safeParse(data);
-  if (!parsed.success) {
-    const errors = parsed.error.issues.map(issue => issue.message);
-    throw new Error(JSON.stringify(errors));
-  }
-  return parsed.data;
-}
+import { dataParse } from '../utils/data';
 
 /**
  * 基础 API 类：封装通用请求逻辑，所有业务模块继承此类
@@ -49,7 +35,7 @@ export class BaseApi {
 
     // 调用适配器发起请求
     const r = await this.requestAdapter.request<T>(finalConfig);
-    return await parse(r, config.schema);
+    return dataParse(r, config.schema);
   }
 
   /**
