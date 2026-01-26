@@ -1,5 +1,11 @@
 # @xiaoqianshuo/api
 
+## 0.3.7
+
+### Patch Changes
+
+- 0c9721a: 🐞 fix(请求头): 修正请求头只读bug
+
 ## 0.3.6
 
 ### Patch Changes
