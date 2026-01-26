@@ -34,6 +34,7 @@ export class BaseApi {
     // 构建最终请求配置
     const finalConfig: RequestConfig<T> = {
       ...config,
+      headers: new Headers(config.headers),
       url: finalUrl,
     };
 
