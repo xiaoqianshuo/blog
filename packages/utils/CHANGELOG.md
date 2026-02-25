@@ -1,5 +1,11 @@
 # @xiaoqianshuo/utils
 
+## 1.2.8
+
+### Patch Changes
+
+- 86f1b07: 📃 docs(readme): 添加新功能文档
+
 ## 1.2.7
 
 ### Patch Changes
