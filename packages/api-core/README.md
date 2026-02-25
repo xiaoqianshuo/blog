@@ -16,7 +16,16 @@
 
 **内置适配器：**
 
-- `FetchRequestAdapter`：基于 Fetch API（浏览器和 Node.js ≥18 原生支持）
+- `FetchRequestAdapter`：基于 Fetch API（浏览器和 Node.js ≥18 原生支持），默认建议使用单例模式以优化资源消耗
+
+**单例模式使用：**
+
+```typescript
+import { singletonFetchRequestAdapter } from '@xiaoqianshuo/api-core';
+
+// 直接使用预创建的单例实例
+const adapter = singletonFetchRequestAdapter;
+```
 
 **自定义适配器示例：**
 
@@ -45,11 +54,19 @@ export class AxiosAdapter extends RequestAdapter {
 **提供的方法签名：**
 
 ```typescript
-protected get<T>(path: string, params: Record<string, string>, schema: z.ZodType<T>, headers?: Record<string, string>): Promise<T>
-protected post<T>(path: string, body: Record<string, unknown>, schema: z.ZodType<T>, headers?: Record<string, string>): Promise<T>
-protected put<T>(path: string, body: Record<string, unknown>, schema: z.ZodType<T>, headers?: Record<string, string>): Promise<T>
-protected patch<T>(path: string, body: Record<string, unknown>, schema: z.ZodType<T>, headers?: Record<string, string>): Promise<T>
-protected delete<T>(path: string, schema: z.ZodType<T>, headers?: Record<string, string>): Promise<T>
+// 简单重载：仅路径和 Schema
+protected get<T>(path: string, schema: z.ZodType<T>): Promise<T>
+protected post<T>(path: string, schema: z.ZodType<T>): Promise<T>
+protected put<T>(path: string, schema: z.ZodType<T>): Promise<T>
+protected patch<T>(path: string, schema: z.ZodType<T>): Promise<T>
+protected delete<T>(path: string, schema: z.ZodType<T>): Promise<T>
+
+// 配置对象重载：支持所有选项
+protected get<T>(config: { path: string; schema: z.ZodType<T>; params?: Record<string, string>; headers?: Headers }): Promise<T>
+protected post<T>(config: { path: string; schema: z.ZodType<T>; body?: Record<string, unknown>; headers?: Headers }): Promise<T>
+protected put<T>(config: { path: string; schema: z.ZodType<T>; body?: Record<string, unknown>; headers?: Headers }): Promise<T>
+protected patch<T>(config: { path: string; schema: z.ZodType<T>; body?: Record<string, unknown>; headers?: Headers }): Promise<T>
+protected delete<T>(config: { path: string; schema: z.ZodType<T>; headers?: Headers }): Promise<T>
 ```
 
 ### 3. 装饰器
@@ -117,7 +134,7 @@ export class UserApi extends BaseApi {
    * @param params 查询参数（如分页、排序等）
    */
   async listUsers(params?: Record<string, string>) {
-    return await this.get('', params || {}, UserListResponse);
+    return await this.get({ path: '', params, schema: UserListResponse });
   }
 
   /**
@@ -125,7 +142,7 @@ export class UserApi extends BaseApi {
    * @param userId 用户 ID
    */
   async getUser(userId: string) {
-    return await this.get(`/${userId}`, {}, User);
+    return await this.get(userId, User);
   }
 
   /**
@@ -133,7 +150,7 @@ export class UserApi extends BaseApi {
    * @param data 用户信息
    */
   async createUser(data: CreateUserRequest) {
-    return await this.post('', data, User);
+    return await this.post({ path: '', body: data, schema: User });
   }
 
   /**
@@ -142,7 +159,7 @@ export class UserApi extends BaseApi {
    * @param data 更新数据
    */
   async updateUser(userId: string, data: Partial<CreateUserRequest>) {
-    return await this.put(`/${userId}`, data, User);
+    return await this.put({ path: userId, body: data, schema: User });
   }
 
   /**
@@ -150,7 +167,7 @@ export class UserApi extends BaseApi {
    * @param userId 用户 ID
    */
   async deleteUser(userId: string) {
-    return await this.delete(`/${userId}`, User);
+    return await this.delete(userId, User);
   }
 }
 ```
@@ -165,23 +182,23 @@ import { BaseApi } from '@xiaoqianshuo/api-core';
  */
 export class UserApi extends BaseApi {
   async listUsers(params?: Record<string, string>) {
-    return await this.get('', params || {}, UserListResponse);
+    return await this.get({ path: '', params, schema: UserListResponse });
   }
 
   async getUser(userId: string) {
-    return await this.get(`/${userId}`, {}, User);
+    return await this.get(userId, User);
   }
 
   async createUser(data: CreateUserRequest) {
-    return await this.post('', data, User);
+    return await this.post({ path: '', body: data, schema: User });
   }
 
   async updateUser(userId: string, data: Partial<CreateUserRequest>) {
-    return await this.put(`/${userId}`, data, User);
+    return await this.put({ path: userId, body: data, schema: User });
   }
 
   async deleteUser(userId: string) {
-    return await this.delete(`/${userId}`, User);
+    return await this.delete(userId, User);
   }
 }
 ```
@@ -403,7 +420,7 @@ interface RequestConfig<T = unknown> {
   data?: Record<string, unknown>;
 
   /** 请求头 */
-  headers?: Record<string, string>;
+  headers?: Headers;
 
   /** 兼容其他自定义配置字段 */
   [key: string]: unknown;

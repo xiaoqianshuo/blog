@@ -10,6 +10,7 @@
   - [TaskQueue 任务队列](#taskqueue-任务队列)
   - [eventEmitter 事件系统](#eventemitter-事件系统)
   - [throttle 节流函数](#throttle-节流函数)
+  - [singleton 单例模式](#singleton-单例模式)
 - [开发指南](#开发指南)
 - [目录结构](#目录结构)
 - [贡献](#贡献)
@@ -202,6 +203,28 @@ const fetchResource = groupThrottleAsync(async (resourceType, id) => {
 fetchResource('post', 1);
 fetchResource('post', 2); // 被节流
 fetchResource('comment', 1); // 独立执行
+```
+
+### singleton 单例模式
+
+**适用场景**：确保一个类只有一个实例，并提供一个全局访问点。
+
+```typescript
+import { singleton } from '@xiaoqianshuo/utils';
+
+class MyClass {
+  constructor() {
+    console.log('MyClass instance created');
+  }
+}
+
+// 创建单例类
+const SingletonMyClass = singleton(MyClass);
+
+const instance1 = new SingletonMyClass(); // 输出: MyClass instance created
+const instance2 = new SingletonMyClass(); // 不输出任何内容
+
+console.log(instance1 === instance2); // 输出: true
 ```
 
 ## 开发指南
