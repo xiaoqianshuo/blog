@@ -1,5 +1,5 @@
+import { Constructor } from '@xiaoqianshuo/utils/types';
 import { BaseApi } from '../core/base-api';
-import { Constructor } from '../types';
 import { joinMultiplePaths } from '../utils/path';
 
 /**

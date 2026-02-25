@@ -1,5 +1,5 @@
+import { Constructor } from '@xiaoqianshuo/utils/types';
 import { RequestAdapter } from '../adapters/request.adapter';
-import { Constructor } from '../types';
 import { BaseApi } from './base-api';
 
 // 定义“递归 API 树”类型
