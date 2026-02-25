@@ -1,5 +1,11 @@
 # @xiaoqianshuo/utils
 
+## 1.2.7
+
+### Patch Changes
+
+- 150f1c5: 🎈 perf(请求单例): 使用单例模式优化
+
 ## 1.2.6
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @xiaoqianshuo/api
 
+## 0.3.8
+
+### Patch Changes
+
+- 150f1c5: 🎈 perf(请求单例): 使用单例模式优化
+- Updated dependencies [150f1c5]
+  - @xiaoqianshuo/utils@1.2.7
+
 ## 0.3.7
 
 ### Patch Changes
