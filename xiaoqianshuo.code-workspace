@@ -2,48 +2,52 @@
   "folders": [
     {
       "name": "workspace",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "cli",
-      "path": "packages/cli"
+      "path": "packages/cli",
     },
     {
       "name": "web",
-      "path": "apps/web"
+      "path": "apps/web",
+    },
+    {
+      "name": "mobile",
+      "path": "apps/mobile",
     },
     {
       "name": "types",
-      "path": "packages/types"
+      "path": "packages/types",
     },
     {
       "name": "api-core",
-      "path": "packages/api-core"
+      "path": "packages/api-core",
     },
     {
       "name": "api-v1",
-      "path": "packages/api-v1"
+      "path": "packages/api-v1",
     },
     {
       "name": "utils",
-      "path": "packages/utils"
+      "path": "packages/utils",
     },
     {
       "name": "react-ui",
-      "path": "packages/ui/react"
+      "path": "packages/ui/react",
     },
     {
       "name": "vue-ui",
-      "path": "packages/ui/vue"
+      "path": "packages/ui/vue",
     },
     {
       "name": "eslint-config",
-      "path": "packages/config/eslint"
+      "path": "packages/config/eslint",
     },
     {
       "name": "prettier-config",
-      "path": "packages/config/prettier"
-    }
+      "path": "packages/config/prettier",
+    },
   ],
   "settings": {
     "cSpell.words": [
@@ -54,7 +58,7 @@
       "qlqs",
       "rollup",
       "tsup",
-      "xiaoqianshuo"
+      "xiaoqianshuo",
     ],
     "prettier.configPath": "prettier.config.js",
     "explorer.fileNesting.enabled": true,
@@ -62,10 +66,12 @@
       "tsconfig.json": "tsconfig.*.json, env.d.ts",
       "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
       "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .prettier*, prettier*, .editorconfig",
-      "*.cjs": "${capture}.cjs.map"
+      "*.cjs": "${capture}.cjs.map",
     },
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
+      "source.organizeImports": "explicit",
+      "source.sortMembers": "explicit",
     },
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
