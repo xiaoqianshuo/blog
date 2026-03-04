@@ -3,3 +3,5 @@ packages:
   - packages/config/*
   - packages/ui/*
   - apps/*
+
+nodeLinker: hoisted
