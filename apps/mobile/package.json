@@ -6,10 +6,20 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "build:ios": "eas build --clear-cache --platform ios",
+    "build:android": "eas build --clear-cache --platform android",
+    "build:dev:ios": "pnpm build:ios --profile development",
+    "build:android:apk": "pnpm build:android --profile production-apk",
+    "build:dev:android": "pnpm build:android --profile development",
+    "local:build:ios": "pnpm build:ios --local",
+    "local:build:android": "pnpm build:android --local",
+    "local:build:dev:ios": "pnpm build:ios --profile development --local",
+    "local:build:android:apk": "pnpm build:android --profile production-apk --local",
+    "local:build:dev:android": "pnpm build:android --profile development  --local"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.7.3",
@@ -41,6 +51,8 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.14",
+    "eas-cli": "18.0.6",
+    "eslint-config-expo": "~55.0.0",
     "typescript": "~5.9.2"
   }
 }

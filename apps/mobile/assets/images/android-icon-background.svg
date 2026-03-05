@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2D7DFF"/>
+      <stop offset="55%" stop-color="#74C0FF"/>
+      <stop offset="100%" stop-color="#D6F2FF"/>
+    </linearGradient>
+    <radialGradient id="haze2" cx="25%" cy="18%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#sky2)"/>
+  <rect width="1024" height="1024" fill="url(#haze2)"/>
+
+  <!-- Subtle grain dots -->
+  <g opacity="0.10" fill="#FFFFFF">
+    <circle cx="180" cy="820" r="6"/>
+    <circle cx="240" cy="780" r="4"/>
+    <circle cx="860" cy="180" r="5"/>
+    <circle cx="820" cy="240" r="4"/>
+    <circle cx="700" cy="860" r="4"/>
+    <circle cx="320" cy="220" r="4"/>
+  </g>
+</svg>
