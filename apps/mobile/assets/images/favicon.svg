@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Rounded corner mask -->
+    <clipPath id="roundedClip">
+      <!-- rx=220 大约是 21.5% 圆角，接近 iOS 风格；想更圆就调大 -->
+      <rect x="0" y="0" width="1024" height="1024" rx="220" ry="220"/>
+    </clipPath>
+
+    <!-- Background gradients -->
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2D7DFF"/>
+      <stop offset="55%" stop-color="#74C0FF"/>
+      <stop offset="100%" stop-color="#D6F2FF"/>
+    </linearGradient>
+    <radialGradient id="haze2" cx="25%" cy="18%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Foreground plane effects -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0B3A7A" flood-opacity="0.18"/>
+    </filter>
+    <linearGradient id="plane" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EAF6FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Clip everything to rounded rect -->
+  <g clip-path="url(#roundedClip)">
+    <!-- Rounded background -->
+    <rect width="1024" height="1024" rx="220" ry="220" fill="url(#sky2)"/>
+    <rect width="1024" height="1024" rx="220" ry="220" fill="url(#haze2)"/>
+
+    <!-- Subtle grain dots -->
+    <g opacity="0.10" fill="#FFFFFF">
+      <circle cx="180" cy="820" r="6"/>
+      <circle cx="240" cy="780" r="4"/>
+      <circle cx="860" cy="180" r="5"/>
+      <circle cx="820" cy="240" r="4"/>
+      <circle cx="700" cy="860" r="4"/>
+      <circle cx="320" cy="220" r="4"/>
+    </g>
+
+    <g filter="url(#shadow)">
+      <!-- Soft cloud -->
+      <g opacity="0.98" fill="#FFFFFF">
+        <path d="M330 640
+                 C290 640, 260 610, 260 570
+                 C260 535, 285 507, 318 502
+                 C332 445, 384 405, 446 405
+                 C503 405, 552 438, 571 488
+                 C585 482, 602 478, 620 478
+                 C680 478, 730 526, 730 586
+                 C730 620, 706 647, 672 653
+                 C655 700, 610 730, 557 730
+                 L360 730
+                 C342 730, 330 712, 330 694
+                 Z"/>
+      </g>
+
+      <!-- Paper plane -->
+      <path d="M735 360
+               L335 540
+               L510 600
+               L565 760
+               Z"
+            fill="url(#plane)" stroke="#D7ECFF" stroke-width="10" stroke-linejoin="round"/>
+
+      <!-- Plane fold line -->
+      <path d="M335 540 L510 600 L735 360"
+            fill="none" stroke="#BFDFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+
+      <!-- Small sparkle -->
+      <circle cx="760" cy="320" r="16" fill="#FFFFFF" opacity="0.95"/>
+      <circle cx="805" cy="350" r="9" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+  </g>
+</svg>
