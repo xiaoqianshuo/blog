@@ -10,7 +10,11 @@ const config: ExpoConfig = {
   scheme: 'blog',
   userInterfaceStyle: 'automatic',
   ios: {
-    icon: './assets/expo.icon',
+    icon: {
+      light: './assets/images/icon.png',
+      dark: './assets/images/icon-dark.png',
+      tinted: './assets/images/icon-tinted.png'
+    },
     bundleIdentifier: 'work.qlqs.blog',
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false
