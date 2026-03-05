@@ -171,6 +171,9 @@ importers:
       '@types/react':
         specifier: ~19.2.14
         version: 19.2.14
+      '@xiaoqianshuo/prettier-config':
+        specifier: workspace:^
+        version: link:../../packages/config/prettier
       eas-cli:
         specifier: 18.0.6
         version: 18.0.6(@types/node@24.3.0)(typescript@5.9.2)

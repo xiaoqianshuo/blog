@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Sky theme (default, from icon.svg) ──────── */
+:root,
+[data-theme="sky"] {
+  --bg:           #F4F9FE;
+  --bg-card:      #FFFFFF;
+  --bg-subtle:    #EAF4FF;
+  --text:         #0E2340;
+  --text-muted:   #4B6A87;
+  --text-light:   #8AAFC9;
+  --accent:       #3B8EFF;
+  --accent-mid:   #74C0FF;
+  --accent-pale:  #D6F2FF;
+  --accent-deep:  #2D7DFF;
+  --accent-warm:  #FF8A4C;
+  --accent-muted: #9B8FFF;
+  --border:       #D8E9F6;
+  --border-light: #EAF4FF;
+  --tag-tech:     #E8F2FF;
+  --tag-life:     #FFF0E8;
+  --tag-essay:    #F0EEFF;
+}
+
+/* ── Jade theme (Japanese minimal / sage green) ── */
+[data-theme="jade"] {
+  --bg:           #FAFAF7;
+  --bg-card:      #FFFFFF;
+  --bg-subtle:    #F4F2EE;
+  --text:         #2C2C2C;
+  --text-muted:   #7A7A7A;
+  --text-light:   #ADADAD;
+  --accent:       #7A9E7A;
+  --accent-mid:   #A8C4A8;
+  --accent-pale:  #DCE9DC;
+  --accent-deep:  #4D7A4D;
+  --accent-warm:  #C4956A;
+  --accent-muted: #9A8FC4;
+  --border:       #E4E0DA;
+  --border-light: #EEEBE6;
+  --tag-tech:     #EDF3ED;
+  --tag-life:     #F5EEE5;
+  --tag-essay:    #EDEAF5;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --font-serif: 'Lora', 'Hiragino Mincho ProN', 'Yu Mincho', 'STSong', 'SimSun', Georgia, serif;
+  --font-sans:  'Inter', 'Hiragino Sans', 'PingFang SC', 'Noto Sans SC', sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.85;
+  min-height: 100vh;
 }
+
+/* ── Typography ──────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Article prose ───────────────────────────── */
+.prose {
+  max-width: 68ch;
+  color: var(--text);
+  line-height: 1.9;
+}
+.prose h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 2.5rem 0 0.9rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.prose h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 2rem 0 0.6rem;
+}
+.prose p {
+  margin: 0 0 1.4rem;
+  color: #3D3D3D;
+}
+.prose ul, .prose ol {
+  padding-left: 1.5rem;
+  margin: 0 0 1.4rem;
+}
+.prose li {
+  margin-bottom: 0.4rem;
+}
+.prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  color: var(--accent-deep);
+}
+.prose pre {
+  background: #F0EEE9;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+  color: #3D3D3D;
+  line-height: 1.7;
+}
+.prose blockquote {
+  border-left: 3px solid var(--accent-pale);
+  padding: 0.5rem 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Utilities ───────────────────────────────── */
+.font-sans { font-family: var(--font-sans); }
+.font-serif { font-family: var(--font-serif); }
+.font-mono { font-family: var(--font-mono); }
+
+/* ── Animations ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
+/* ── Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--accent-pale); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-mid); }
