@@ -25,7 +25,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="zh-CN" className={lora.variable}>
+    <html lang="zh-CN" className={lora.variable} data-theme="jade" data-scheme="light" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        {/* Anti-flash: apply persisted theme before first paint */}
+        <script dangerouslySetInnerHTML={{ __html: `
+(function(){try{
+  var t=localStorage.getItem('blog-theme')||'jade';
+  var m=localStorage.getItem('blog-mode')||'auto';
+  var dark=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+  document.documentElement.setAttribute('data-theme',t);
+  document.documentElement.setAttribute('data-scheme',dark?'dark':'light');
+}catch(e){}})();
+        `}} />
+      </head>
       <body>
         <ThemeProvider>
           <Nav />

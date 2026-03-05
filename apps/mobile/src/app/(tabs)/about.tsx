@@ -1,4 +1,4 @@
-import { useTheme } from '@/lib/theme-context'
+import { useTheme, type DisplayMode } from '@/lib/theme-context'
 import { type ThemeName, themeLabels } from '@/lib/themes'
 import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Animated, { FadeInDown } from 'react-native-reanimated'
@@ -16,9 +16,15 @@ const links = [
   { label: 'Email', url: 'mailto:xiaoqianshuo@163.com', icon: '✉' },
 ]
 
+const modeOptions: { id: DisplayMode; icon: string; label: string }[] = [
+  { id: 'auto',  icon: '◑', label: '自动' },
+  { id: 'light', icon: '○', label: '亮色' },
+  { id: 'dark',  icon: '●', label: '暗色' },
+]
+
 export default function AboutScreen() {
   const insets = useSafeAreaInsets()
-  const { colors, fonts, themeName, setTheme } = useTheme()
+  const { colors, fonts, themeName, setTheme, mode, setMode } = useTheme()
 
   return (
     <ScrollView
@@ -110,13 +116,16 @@ export default function AboutScreen() {
         </View>
       </Animated.View>
 
-      {/* Theme switcher */}
+      {/* Appearance: Theme + Mode */}
       <Animated.View
         entering={FadeInDown.delay(480).springify().damping(18)}
         style={styles.skillGroup}
       >
         <Text style={[styles.skillGroupLabel, { color: colors.textMuted }]}>外观</Text>
-        <View style={styles.themeRow}>
+
+        {/* Theme palette */}
+        <Text style={[styles.subLabel, { color: colors.textLight }]}>主题色彩</Text>
+        <View style={[styles.themeRow, { marginBottom: 16 }]}>
           {(Object.entries(themeLabels) as [ThemeName, typeof themeLabels[ThemeName]][]).map(([id, t]) => {
             const active = themeName === id
             return (
@@ -138,11 +147,37 @@ export default function AboutScreen() {
             )
           })}
         </View>
+
+        {/* Display mode */}
+        <Text style={[styles.subLabel, { color: colors.textLight }]}>显示模式</Text>
+        <View style={[styles.modeRow, { backgroundColor: colors.bgSubtle, borderColor: colors.border }]}>
+          {modeOptions.map((m) => {
+            const active = mode === m.id
+            return (
+              <Pressable
+                key={m.id}
+                onPress={() => setMode(m.id)}
+                style={[
+                  styles.modeBtn,
+                  active && { backgroundColor: colors.bgCard, borderColor: colors.accent },
+                  !active && { borderColor: 'transparent' },
+                ]}
+              >
+                <Text style={[styles.modeIcon, { color: active ? colors.accent : colors.textLight }]}>
+                  {m.icon}
+                </Text>
+                <Text style={[styles.modeText, { color: active ? colors.text : colors.textMuted }]}>
+                  {m.label}
+                </Text>
+              </Pressable>
+            )
+          })}
+        </View>
       </Animated.View>
 
       {/* Footer note */}
       <Animated.View
-        entering={FadeInDown.delay(500).springify().damping(18)}
+        entering={FadeInDown.delay(520).springify().damping(18)}
         style={styles.footerNote}
       >
         <Text style={[styles.footerDots, { color: colors.accentMid }]}>· · ·</Text>
@@ -236,6 +271,11 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: 10,
   },
+  subLabel: {
+    fontSize: 11,
+    letterSpacing: 0.5,
+    marginBottom: 8,
+  },
   skillChips: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -306,6 +346,31 @@ const styles = StyleSheet.create({
   themeDesc: {
     fontSize: 11,
     letterSpacing: 0.2,
+  },
+  modeRow: {
+    flexDirection: 'row',
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 4,
+    gap: 4,
+  },
+  modeBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: 10,
+    borderRadius: 9,
+    borderWidth: 1,
+  },
+  modeIcon: {
+    fontSize: 13,
+    lineHeight: 16,
+  },
+  modeText: {
+    fontSize: 13,
+    fontWeight: '500',
   },
   footerNote: {
     alignItems: 'center',

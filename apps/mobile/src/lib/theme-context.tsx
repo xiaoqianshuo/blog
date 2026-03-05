@@ -1,13 +1,16 @@
-'use client'
-
 import { createContext, useContext, useState, type ReactNode } from 'react'
-import { Platform } from 'react-native'
-import { themes, skyTheme, type ThemeName, type ThemeColors } from './themes'
+import { Platform, useColorScheme } from 'react-native'
+import { getThemeColors, skyTheme, type ColorScheme, type ThemeColors, type ThemeName } from './themes'
+
+export type DisplayMode = 'auto' | 'light' | 'dark'
 
 interface ThemeContextValue {
   themeName: ThemeName
+  mode: DisplayMode
+  effectiveScheme: ColorScheme
   colors: ThemeColors
   setTheme: (name: ThemeName) => void
+  setMode: (m: DisplayMode) => void
   fonts: { serif: string | undefined; sans: string | undefined; mono: string }
 }
 
@@ -18,20 +21,37 @@ const fonts = {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  themeName: 'sky',
+  themeName: 'jade',
+  mode: 'auto',
+  effectiveScheme: 'light',
   colors: skyTheme,
   setTheme: () => {},
+  setMode: () => {},
   fonts,
 })
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  const systemScheme = useColorScheme()
   const [themeName, setThemeName] = useState<ThemeName>('sky')
+  const [mode, setModeState] = useState<DisplayMode>('auto')
+
+  const effectiveScheme: ColorScheme =
+    mode === 'auto' ? (systemScheme === 'dark' ? 'dark' : 'light') : mode
 
   const setTheme = (name: ThemeName) => setThemeName(name)
+  const setMode  = (m: DisplayMode)  => setModeState(m)
 
   return (
     <ThemeContext.Provider
-      value={{ themeName, colors: themes[themeName], setTheme, fonts }}
+      value={{
+        themeName,
+        mode,
+        effectiveScheme,
+        colors: getThemeColors(themeName, effectiveScheme),
+        setTheme,
+        setMode,
+        fonts,
+      }}
     >
       {children}
     </ThemeContext.Provider>
