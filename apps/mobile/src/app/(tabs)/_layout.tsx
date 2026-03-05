@@ -21,7 +21,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: colors.textLight,
         tabBarStyle: {
-          backgroundColor: 'rgba(250, 250, 247, 0.95)',
+          backgroundColor: colors.bgCard,
           borderTopColor: colors.borderLight,
           borderTopWidth: 1,
           paddingTop: 6,

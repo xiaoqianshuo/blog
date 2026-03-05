@@ -1,12 +1,18 @@
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { ThemeProvider } from '@/lib/theme-context'
+import { ThemeProvider, useTheme } from '@/lib/theme-context'
 
-export default function RootLayout() {
+function AppStack() {
+  const { effectiveScheme, colors } = useTheme()
   return (
-    <ThemeProvider>
-      <StatusBar style="dark" />
-      <Stack screenOptions={{ headerShown: false }}>
+    <>
+      <StatusBar style={effectiveScheme === 'dark' ? 'light' : 'dark'} />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: colors.bg },
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="blog/[slug]"
@@ -17,6 +23,14 @@ export default function RootLayout() {
           }}
         />
       </Stack>
+    </>
+  )
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <AppStack />
     </ThemeProvider>
   )
 }

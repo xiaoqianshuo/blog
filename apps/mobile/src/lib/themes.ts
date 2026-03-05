@@ -1,6 +1,5 @@
-import type { ColorSchemeName } from 'react-native'
-
 export type ThemeName = 'sky' | 'jade'
+export type ColorScheme = 'light' | 'dark'
 
 export interface ThemeColors {
   bg: string
@@ -22,7 +21,7 @@ export interface ThemeColors {
   tagEssay: string
 }
 
-// ── Sky theme (from icon.svg gradient) ──────────
+// ── Sky · Light ──────────────────────────────────
 export const skyTheme: ThemeColors = {
   bg:          '#F4F9FE',
   bgCard:      '#FFFFFF',
@@ -43,7 +42,28 @@ export const skyTheme: ThemeColors = {
   tagEssay:    '#F0EEFF',
 }
 
-// ── Jade theme (Japanese minimal / sage green) ───
+// ── Sky · Dark ───────────────────────────────────
+export const skyDarkTheme: ThemeColors = {
+  bg:          '#0C1A2E',
+  bgCard:      '#112038',
+  bgSubtle:    '#162540',
+  text:        '#D6EEFF',
+  textMuted:   '#7AAEC8',
+  textLight:   '#3F6480',
+  accent:      '#74C0FF',
+  accentMid:   '#4A9EE8',
+  accentPale:  '#1A3A5C',
+  accentDeep:  '#90CFFF',
+  accentWarm:  '#FFAA78',
+  accentMuted: '#B8B0FF',
+  border:      '#1E3A54',
+  borderLight: '#162E46',
+  tagTech:     '#0F2540',
+  tagLife:     '#2E1A0E',
+  tagEssay:    '#1C1A38',
+}
+
+// ── Jade · Light ─────────────────────────────────
 export const jadeTheme: ThemeColors = {
   bg:          '#FAFAF7',
   bgCard:      '#FFFFFF',
@@ -64,9 +84,34 @@ export const jadeTheme: ThemeColors = {
   tagEssay:    '#EDEAF5',
 }
 
-export const themes: Record<ThemeName, ThemeColors> = {
-  sky:  skyTheme,
-  jade: jadeTheme,
+// ── Jade · Dark ───────────────────────────────────
+export const jadeDarkTheme: ThemeColors = {
+  bg:          '#161A16',
+  bgCard:      '#1E221E',
+  bgSubtle:    '#252A25',
+  text:        '#E2EAE2',
+  textMuted:   '#8AAA8A',
+  textLight:   '#4A624A',
+  accent:      '#8EC48E',
+  accentMid:   '#6AAE6A',
+  accentPale:  '#1C301C',
+  accentDeep:  '#A8D4A8',
+  accentWarm:  '#DEAF88',
+  accentMuted: '#B2AADC',
+  border:      '#2A342A',
+  borderLight: '#222822',
+  tagTech:     '#182018',
+  tagLife:     '#281E10',
+  tagEssay:    '#1E1A2E',
+}
+
+export const allThemes: Record<ThemeName, Record<ColorScheme, ThemeColors>> = {
+  sky:  { light: skyTheme,  dark: skyDarkTheme  },
+  jade: { light: jadeTheme, dark: jadeDarkTheme },
+}
+
+export function getThemeColors(name: ThemeName, scheme: ColorScheme): ThemeColors {
+  return allThemes[name][scheme]
 }
 
 export const themeLabels: Record<ThemeName, { label: string; dot: string; desc: string }> = {

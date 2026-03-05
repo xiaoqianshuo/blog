@@ -45,6 +45,7 @@ export default function Footer() {
             margin: 0,
             textAlign: 'center',
           }}
+          suppressHydrationWarning
         >
           © {year} xiaoqianshuo &nbsp;·&nbsp; 用代码描绘世界，用文字记录时光
         </p>

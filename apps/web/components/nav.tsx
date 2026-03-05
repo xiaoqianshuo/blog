@@ -19,7 +19,7 @@ export default function Nav() {
         position: 'sticky',
         top: 0,
         zIndex: 50,
-        background: 'rgba(250, 250, 247, 0.88)',
+        background: 'var(--bg-nav)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderBottom: '1px solid var(--border-light)',
