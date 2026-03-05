@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Background gradients for dark mode -->
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#061A3A"/>
+      <stop offset="55%" stop-color="#0A2D66"/>
+      <stop offset="100%" stop-color="#0C3A7A"/>
+    </linearGradient>
+    <radialGradient id="moonHaze" cx="28%" cy="18%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.18"/>
+      <stop offset="55%" stop-color="#7CC7FF" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Slight vignette -->
+    <radialGradient id="vignette" cx="50%" cy="55%" r="75%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.25"/>
+    </radialGradient>
+
+    <!-- Shadow tuned for dark background -->
+    <filter id="shadowDark" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Plane gradient: keep bright but slightly cool -->
+    <linearGradient id="planeDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DCEEFF"/>
+    </linearGradient>
+
+    <!-- Cloud gradient (subtle) -->
+    <linearGradient id="cloudDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EAF4FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <rect width="1024" height="1024" fill="url(#night)"/>
+  <rect width="1024" height="1024" fill="url(#moonHaze)"/>
+  <rect width="1024" height="1024" fill="url(#vignette)"/>
+
+  <!-- Stars / dots -->
+  <g opacity="0.18" fill="#FFFFFF">
+    <circle cx="180" cy="820" r="6"/>
+    <circle cx="240" cy="780" r="4"/>
+    <circle cx="860" cy="180" r="5"/>
+    <circle cx="820" cy="240" r="4"/>
+    <circle cx="700" cy="860" r="4"/>
+    <circle cx="320" cy="220" r="4"/>
+    <circle cx="120" cy="260" r="3"/>
+    <circle cx="920" cy="520" r="3"/>
+    <circle cx="560" cy="170" r="3"/>
+  </g>
+
+  <!-- Foreground mark -->
+  <g filter="url(#shadowDark)">
+    <!-- Soft cloud -->
+    <g opacity="0.98" fill="url(#cloudDark)">
+      <path d="M330 640
+               C290 640, 260 610, 260 570
+               C260 535, 285 507, 318 502
+               C332 445, 384 405, 446 405
+               C503 405, 552 438, 571 488
+               C585 482, 602 478, 620 478
+               C680 478, 730 526, 730 586
+               C730 620, 706 647, 672 653
+               C655 700, 610 730, 557 730
+               L360 730
+               C342 730, 330 712, 330 694
+               Z"/>
+    </g>
+
+    <!-- Paper plane -->
+    <path d="M735 360
+             L335 540
+             L510 600
+             L565 760
+             Z"
+          fill="url(#planeDark)" stroke="#9ED5FF" stroke-width="10" stroke-linejoin="round"/>
+
+    <!-- Plane fold line -->
+    <path d="M335 540 L510 600 L735 360"
+          fill="none" stroke="#7CC7FF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+
+    <!-- Small sparkle -->
+    <circle cx="760" cy="320" r="16" fill="#FFFFFF" opacity="0.95"/>
+    <circle cx="805" cy="350" r="9" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+</svg>
