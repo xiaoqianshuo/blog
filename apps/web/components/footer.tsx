@@ -72,6 +72,26 @@ export default function Footer() {
             </Link>
           ))}
         </div>
+
+        <a
+          href="https://beian.miit.gov.cn"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            fontFamily: 'var(--font-sans)',
+            fontSize: '0.75rem',
+            color: 'var(--text-light)',
+            textDecoration: 'none',
+            letterSpacing: '0.04em',
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/beian.png" alt="备案图标" style={{ width: '16px', height: '16px' }} />
+          赣ICP备20008842号-1
+        </a>
       </div>
     </footer>
   )
