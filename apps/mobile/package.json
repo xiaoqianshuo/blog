@@ -14,11 +14,11 @@
     "build:dev:ios": "pnpm build:ios --profile development",
     "build:android:apk": "pnpm build:android --profile production-apk",
     "build:dev:android": "pnpm build:android --profile development",
-    "local:build:ios": "pnpm build:ios --local",
-    "local:build:android": "pnpm build:android --local",
-    "local:build:dev:ios": "pnpm build:ios --profile development --local",
-    "local:build:android:apk": "pnpm build:android --profile production-apk --local",
-    "local:build:dev:android": "pnpm build:android --profile development  --local"
+    "build:ios:local": "pnpm build:ios --local",
+    "build:android:local": "pnpm build:android --local",
+    "build:dev:ios:local": "pnpm build:ios --profile development --local",
+    "build:android:apk:local": "pnpm build:android --profile production-apk --local",
+    "build:dev:android:local": "pnpm build:android --profile development  --local"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "3.0.1",
