@@ -13,12 +13,12 @@ const config: ExpoConfig = {
     icon: {
       light: './assets/images/icon.png',
       dark: './assets/images/icon-dark.png',
-      tinted: './assets/images/icon-tinted.png'
+      tinted: './assets/images/icon-tinted.png',
     },
     bundleIdentifier: 'work.qlqs.blog',
     infoPlist: {
-      ITSAppUsesNonExemptEncryption: false
-    }
+      ITSAppUsesNonExemptEncryption: false,
+    },
   },
   android: {
     package: 'work.qlqs.blog',
@@ -27,14 +27,14 @@ const config: ExpoConfig = {
       backgroundColor: '#74C0FF',
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
-      monochromeImage: './assets/images/android-icon-monochrome.png'
+      monochromeImage: './assets/images/android-icon-monochrome.png',
     },
-    predictiveBackGestureEnabled: false
+    predictiveBackGestureEnabled: false,
   },
   web: {
     output: 'static',
     favicon: './assets/images/favicon.png',
-    bundler: 'metro'
+    bundler: 'metro',
   },
   plugins: [
     'expo-router',
@@ -45,22 +45,23 @@ const config: ExpoConfig = {
         image: './assets/images/splash-icon.png',
         dark: {
           image: './assets/images/splash-icon.png',
-          backgroundColor: '#1E1E1E'
+          backgroundColor: '#1E1E1E',
         },
         imageWidth: 200,
-      }
-    ]
+      },
+    ],
+    '@react-native-async-storage/expo-with-async-storage',
   ],
   experiments: {
     typedRoutes: true,
-    reactCompiler: true
+    reactCompiler: true,
   },
   extra: {
     router: {},
     eas: {
-      projectId: 'fc8d6501-d05d-40e6-af69-383df7b0dd0f'
-    }
-  }
+      projectId: 'fc8d6501-d05d-40e6-af69-383df7b0dd0f',
+    },
+  },
 };
 
 export default config;
