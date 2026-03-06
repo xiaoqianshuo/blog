@@ -1,7 +1,11 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 import { Platform, useColorScheme, View } from 'react-native'
 import { vars } from 'nativewind'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { allThemes, getThemeColors, type ColorScheme, type ThemeColors, type ThemeName } from './themes'
+
+const STORAGE_KEY_THEME = '@theme_name'
+const STORAGE_KEY_MODE = '@display_mode'
 
 export type DisplayMode = 'auto' | 'light' | 'dark'
 
@@ -61,6 +65,22 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [themeName, setThemeName] = useState<ThemeName>('jade')
   const [mode, setModeState] = useState<DisplayMode>('auto')
 
+  // Load persisted settings on mount
+  useEffect(() => {
+    AsyncStorage.getItem(STORAGE_KEY_THEME).then(v => { if (v) setThemeName(v as ThemeName) })
+    AsyncStorage.getItem(STORAGE_KEY_MODE).then(v => { if (v) setModeState(v as DisplayMode) })
+  }, [])
+
+  const setTheme = (name: ThemeName) => {
+    setThemeName(name)
+    AsyncStorage.setItem(STORAGE_KEY_THEME, name)
+  }
+
+  const setMode = (m: DisplayMode) => {
+    setModeState(m)
+    AsyncStorage.setItem(STORAGE_KEY_MODE, m)
+  }
+
   const effectiveScheme: ColorScheme =
     mode === 'auto' ? (systemScheme === 'dark' ? 'dark' : 'light') : mode
 
@@ -69,7 +89,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <ThemeContext.Provider value={{
       themeName, mode, effectiveScheme, colors,
-      setTheme: setThemeName, setMode: setModeState, fonts,
+      setTheme, setMode, fonts,
     }}>
       {/* Inject CSS variables — all NativeWind className refs auto-resolve */}
       <View style={[{ flex: 1 }, buildVars(colors)]}>
