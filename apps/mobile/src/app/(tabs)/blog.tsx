@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react'
-import { FlatList, View, Text, Pressable, StyleSheet, TextInput } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import Animated, { FadeInDown } from 'react-native-reanimated'
 import PostCard from '@/components/PostCard'
 import { posts } from '@/lib/blog-data'
 import { useTheme } from '@/lib/theme-context'
+import { cn } from '@/lib/utils'
+import { useMemo, useState } from 'react'
+import { FlatList, Pressable, Text, TextInput, View } from 'react-native'
+import Animated, { FadeInDown } from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const CATEGORIES = ['全部', '技术', '生活', '随笔'] as const
 type Category = (typeof CATEGORIES)[number]
@@ -30,34 +31,33 @@ export default function BlogScreen() {
 
   return (
     <FlatList
-      style={[styles.container, { backgroundColor: colors.bg }]}
-      contentContainerStyle={[
-        styles.content,
-        { paddingTop: insets.top + 16 },
-      ]}
+      className="flex-1 bg-bg"
+      contentContainerStyle={{ paddingHorizontal: 20, paddingTop: insets.top + 16 }}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item) => item.slug}
       data={filteredPosts}
       ListHeaderComponent={
         <View>
           {/* Header */}
-          <Animated.View
-            entering={FadeInDown.delay(0).springify().damping(20)}
-            style={styles.header}
-          >
-            <Text style={[styles.headerLabel, { color: colors.accent }]}>All Articles</Text>
-            <Text style={[styles.headerTitle, { color: colors.text, fontFamily: fonts.serif }]}>文章</Text>
-            <Text style={[styles.headerCount, { color: colors.textMuted }]}>共 {posts.length} 篇</Text>
+          <Animated.View entering={FadeInDown.delay(0).springify().damping(20)} className="py-5 px-1">
+            <Text className="text-[10px] tracking-[2.5px] uppercase mb-1.5 text-accent">All Articles</Text>
+            <Text
+              style={{ fontFamily: fonts.serif }}
+              className="text-[34px] font-bold tracking-[-0.8px] text-text-primary"
+            >
+              文章
+            </Text>
+            <Text className="text-[13px] mt-1 text-text-muted">共 {posts.length} 篇</Text>
           </Animated.View>
 
           {/* Search */}
           <Animated.View
             entering={FadeInDown.delay(80).springify().damping(20)}
-            style={[styles.searchWrapper, { backgroundColor: colors.bgCard, borderColor: colors.border }]}
+            className="flex-row items-center border border-border rounded-[10px] px-3 py-2.5 mb-3.5 gap-2 bg-bg-card"
           >
-            <Text style={[styles.searchIcon, { color: colors.textMuted }]}>⌕</Text>
+            <Text className="text-base text-text-muted">⌕</Text>
             <TextInput
-              style={[styles.searchInput, { color: colors.text }]}
+              className="flex-1 text-sm text-text-primary p-0"
               placeholder="搜索文章…"
               placeholderTextColor={colors.textLight}
               value={searchQuery}
@@ -66,7 +66,7 @@ export default function BlogScreen() {
             />
             {searchQuery.length > 0 && (
               <Pressable onPress={() => setSearchQuery('')}>
-                <Text style={[styles.searchClear, { color: colors.textLight }]}>✕</Text>
+                <Text className="text-xs text-text-light">✕</Text>
               </Pressable>
             )}
           </Animated.View>
@@ -74,7 +74,7 @@ export default function BlogScreen() {
           {/* Category filter */}
           <Animated.View
             entering={FadeInDown.delay(120).springify().damping(20)}
-            style={styles.filterRow}
+            className="flex-row gap-2 mb-5 flex-wrap"
           >
             {CATEGORIES.map((cat) => {
               const active = cat === activeCategory
@@ -82,18 +82,10 @@ export default function BlogScreen() {
                 <Pressable
                   key={cat}
                   onPress={() => setActiveCategory(cat)}
-                  style={[
-                    styles.filterChip,
-                    { borderColor: colors.border, backgroundColor: colors.bgSubtle },
-                    active && { backgroundColor: colors.accent, borderColor: colors.accent },
-                  ]}
+                  className={cn('px-3.5 py-1.5 rounded-full border', active ? 'bg-accent border-accent' : 'border-border')}
                 >
                   <Text
-                    style={[
-                      styles.filterChipText,
-                      { color: colors.textMuted },
-                      active && { color: colors.bgCard, fontWeight: '500' as const },
-                    ]}
+                    className={cn('text-[13px] tracking-[0.3px]', active ? 'font-medium color-bg-card' : 'text-text-muted')}
                   >
                     {cat}
                   </Text>
@@ -102,98 +94,18 @@ export default function BlogScreen() {
             })}
           </Animated.View>
 
-          <View style={[styles.divider, { backgroundColor: colors.borderLight }]} />
+          <View className="h-px mb-4 bg-border-light" />
         </View>
       }
       renderItem={({ item, index }) => (
         <PostCard post={item} index={index} />
       )}
       ListEmptyComponent={
-        <View style={styles.empty}>
-          <Text style={[styles.emptyText, { color: colors.textMuted }]}>没有找到相关文章</Text>
+        <View className="py-[60px] items-center">
+          <Text className="text-sm text-text-muted">没有找到相关文章</Text>
         </View>
       }
-      ListFooterComponent={<View style={{ height: 32 }} />}
+      ListFooterComponent={<View className="h-8" />}
     />
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    paddingHorizontal: 20,
-  },
-  header: {
-    paddingVertical: 20,
-    paddingHorizontal: 4,
-  },
-  headerLabel: {
-    fontSize: 10,
-    letterSpacing: 2.5,
-    textTransform: 'uppercase',
-    marginBottom: 6,
-  },
-  headerTitle: {
-    fontSize: 34,
-    fontWeight: '700',
-    letterSpacing: -0.8,
-  },
-  headerCount: {
-    fontSize: 13,
-    marginTop: 4,
-  },
-  searchWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    marginBottom: 14,
-    gap: 8,
-  },
-  searchIcon: {
-    fontSize: 16,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 14,
-    padding: 0,
-  },
-  searchClear: {
-    fontSize: 12,
-  },
-  filterRow: {
-    flexDirection: 'row',
-    gap: 8,
-    marginBottom: 20,
-    flexWrap: 'wrap',
-  },
-  filterChip: {
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 100,
-    borderWidth: 1,
-  },
-  filterChipText: {
-    fontSize: 13,
-    letterSpacing: 0.3,
-    fontWeight: '400',
-  },
-  filterChipTextActive: {
-    fontWeight: '500',
-  },
-  divider: {
-    height: 1,
-    marginBottom: 16,
-  },
-  empty: {
-    paddingVertical: 60,
-    alignItems: 'center',
-  },
-  emptyText: {
-    fontSize: 14,
-  },
-})

@@ -1,51 +1,68 @@
-import { ScrollView, View, Text, Pressable, StyleSheet, useWindowDimensions } from 'react-native'
+import { formatDate, getPostBySlug, type ContentBlock } from '@/lib/blog-data'
+import { useTheme } from '@/lib/theme-context'
+import { categoryBg, categoryColor } from '@/lib/themes'
+import { cn } from '@/lib/utils'
 import { useLocalSearchParams, useRouter } from 'expo-router'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native'
 import Animated, {
+  Extrapolation,
   FadeInDown,
+  interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
-  interpolate,
-  Extrapolation,
 } from 'react-native-reanimated'
-import { getPostBySlug, formatDate, type ContentBlock } from '@/lib/blog-data'
-import { useTheme } from '@/lib/theme-context'
-import { categoryColor, categoryBg } from '@/lib/themes'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 
 function ContentRenderer({ blocks }: { blocks: ContentBlock[] }) {
-  const { colors, fonts } = useTheme()
+  const { fonts } = useTheme()
   return (
     <>
       {blocks.map((block, i) => {
         switch (block.type) {
           case 'h2':
             return (
-              <View key={i} style={[prose.h2Wrapper, { borderBottomColor: colors.borderLight }]}>
-                <Text style={[prose.h2, { color: colors.text, fontFamily: fonts.serif }]}>{block.text}</Text>
+              <View key={i} className="mt-7 mb-3 border-b border-border-light pb-2">
+                <Text
+                  style={{ fontFamily: fonts.serif }}
+                  className="text-lg font-bold leading-[26px] tracking-[-0.3px] text-text-primary"
+                >
+                  {block.text}
+                </Text>
               </View>
             )
           case 'p':
             return (
-              <Text key={i} style={[prose.p, { fontFamily: fonts.serif, color: colors.textMuted }]}>
+              <Text
+                key={i}
+                style={{ fontFamily: fonts.serif }}
+                className="text-[15px] leading-[26px] mb-4 text-text-muted"
+              >
                 {block.text}
               </Text>
             )
           case 'code':
             return (
-              <View key={i} style={[prose.codeBlock, { backgroundColor: colors.bgSubtle, borderColor: colors.border }]}>
-                <Text style={[prose.codeText, { fontFamily: fonts.mono, color: colors.textMuted }]}>{block.text}</Text>
+              <View key={i} className="border border-border rounded-[10px] p-4 my-4 overflow-hidden bg-bg-subtle">
+                <Text style={{ fontFamily: fonts.mono }} className="text-xs leading-5 text-text-muted">
+                  {block.text}
+                </Text>
               </View>
             )
           case 'ul':
             return (
-              <View key={i} style={prose.ul}>
+              <View key={i} className="mb-4 gap-2">
                 {block.items.map((item, j) => (
-                  <View key={j} style={prose.liRow}>
-                    <View style={[prose.liBullet, { backgroundColor: colors.accentPale, borderColor: colors.accentMid }]} />
-                    <Text style={[prose.liText, { fontFamily: fonts.serif, color: colors.textMuted }]}>{item}</Text>
+                  <View key={j} className="flex-row items-start gap-2.5">
+                    <View className="w-1.5 h-1.5 rounded-full border border-accent-mid bg-accent-pale mt-[9px] shrink-0" />
+                    <Text
+                      style={{ fontFamily: fonts.serif }}
+                      className="flex-1 text-[15px] leading-6 text-text-muted"
+                    >
+                      {item}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -72,48 +89,50 @@ export default function BlogDetailScreen() {
     scrollY.value = e.contentOffset.y
   })
 
-  // Header fades in as user scrolls
   const headerStyle = useAnimatedStyle(() => ({
     opacity: interpolate(scrollY.value, [60, 120], [0, 1], Extrapolation.CLAMP),
   }))
 
-  // Progress bar
   const progressStyle = useAnimatedStyle(() => ({
     width: interpolate(scrollY.value, [0, 3000], [0, width], Extrapolation.CLAMP),
   }))
 
   if (!post) {
     return (
-      <View style={[styles.container, { backgroundColor: colors.bg, paddingTop: insets.top }]}>
-        <Text style={{ color: colors.textMuted, textAlign: 'center', marginTop: 60 }}>
-          文章不存在
-        </Text>
+      <View style={{ paddingTop: insets.top }} className="flex-1 bg-bg">
+        <Text className="text-center mt-[60px] text-text-muted">文章不存在</Text>
       </View>
     )
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.bg }]}>
+    <View className="flex-1 bg-bg">
       {/* Reading progress bar */}
-      <View style={[styles.progressTrack, { backgroundColor: colors.borderLight }]}>
-        <Animated.View style={[styles.progressBar, { backgroundColor: colors.accent }, progressStyle]} />
+      <View className="absolute top-0 left-0 right-0 h-0.5 z-[100] bg-border-light">
+        <Animated.View
+        className={cn('h-0.5 rounded-[1px] bg-accent')}
+          style={progressStyle}
+        />
       </View>
 
       {/* Floating sticky header */}
-      <View style={[styles.stickyHeader, { paddingTop: insets.top, borderBottomColor: colors.borderLight, backgroundColor: colors.bgCard + 'EB' }]}>
-        <Pressable onPress={() => router.back()} style={styles.backBtn}>
-          <Text
-            style={[styles.backText, { color: colors.accent }]}
-            numberOfLines={1}
-            allowFontScaling={false}
-          >
+      <View
+        style={{ paddingTop: insets.top, backgroundColor: colors.bgCard + 'EB' }}
+        className={cn('absolute top-0 left-0 right-0 z-50 flex-row items-center px-4 pb-3 border-b border-border-light')}
+      >
+        <Pressable onPress={() => router.back()} className="py-1.5 pr-3 shrink-0 min-w-[56px]">
+          <Text className="text-[15px] font-medium text-accent" numberOfLines={1} allowFontScaling={false}>
             ‹ 返回
           </Text>
         </Pressable>
-        <Animated.Text style={[styles.stickyTitle, { color: colors.text, fontFamily: fonts.serif }, headerStyle]} numberOfLines={1}>
+        <Animated.Text
+          style={[{ fontFamily: fonts.serif }, headerStyle]}
+          className="flex-1 text-sm font-semibold text-center text-text-primary"
+          numberOfLines={1}
+        >
           {post.title}
         </Animated.Text>
-        <View style={{ minWidth: 56, flexShrink: 0 }} />
+        <View className="min-w-[56px] shrink-0" />
       </View>
 
       {/* Content */}
@@ -121,73 +140,65 @@ export default function BlogDetailScreen() {
         onScroll={scrollHandler}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={[
-          styles.scrollContent,
-          { paddingTop: insets.top + 56 },
-        ]}
+        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 20, paddingTop: insets.top + 56 }}
       >
         {/* Article header */}
-        <Animated.View
-          entering={FadeInDown.delay(50).springify().damping(20)}
-          style={styles.articleHeader}
-        >
+        <Animated.View entering={FadeInDown.delay(50).springify().damping(20)} className="pt-5 pb-1 gap-3">
           {/* Category badge */}
           <View
-            style={[
-              styles.categoryPill,
-              { backgroundColor: categoryBg(colors)[post.category] ?? colors.tagTech },
-            ]}
+            style={{ backgroundColor: categoryBg(colors)[post.category] ?? colors.tagTech }}
+            className="self-start px-2.5 py-[3px] rounded-[20px]"
           >
             <Text
-              style={[
-                styles.categoryText,
-                { color: categoryColor(colors)[post.category] ?? colors.accent },
-              ]}
+              style={{ color: categoryColor(colors)[post.category] ?? colors.accent }}
+              className="text-[10px] font-semibold tracking-[1px]"
             >
               {post.category}
             </Text>
           </View>
 
           {/* Title */}
-          <Text style={[styles.articleTitle, { color: colors.text, fontFamily: fonts.serif }]}>{post.title}</Text>
+          <Text
+            style={{ fontFamily: fonts.serif }}
+            className="text-[26px] font-bold leading-9 tracking-[-0.5px] text-text-primary"
+          >
+            {post.title}
+          </Text>
 
           {/* Meta */}
-          <View style={styles.metaRow}>
-            <Text style={[styles.metaText, { color: colors.textMuted }]}>{formatDate(post.date)}</Text>
-            <View style={[styles.metaDot, { backgroundColor: colors.border }]} />
-            <Text style={[styles.metaText, { color: colors.textMuted }]}>{post.readingTime} 分钟阅读</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-xs tracking-[0.2px] text-text-muted">{formatDate(post.date)}</Text>
+            <View className="w-[3px] h-[3px] rounded-full bg-border" />
+            <Text className="text-xs tracking-[0.2px] text-text-muted">{post.readingTime} 分钟阅读</Text>
           </View>
 
           {/* Tags */}
-          <View style={styles.tags}>
+          <View className="flex-row flex-wrap gap-1.5">
             {post.tags.map((tag) => (
-              <View key={tag} style={[styles.tag, { backgroundColor: colors.bgSubtle, borderColor: colors.borderLight }]}>
-                <Text style={[styles.tagText, { color: colors.textMuted }]}># {tag}</Text>
+              <View key={tag} className="border border-border-light rounded bg-bg-subtle px-2 py-0.5">
+                <Text className="text-[11px] text-text-muted"># {tag}</Text>
               </View>
             ))}
           </View>
         </Animated.View>
 
         {/* Divider */}
-        <View style={[styles.divider, { backgroundColor: colors.borderLight }]} />
+        <View className="h-px my-6 bg-border-light" />
 
         {/* Body */}
-        <Animated.View
-          entering={FadeInDown.delay(150).springify().damping(20)}
-          style={styles.body}
-        >
+        <Animated.View entering={FadeInDown.delay(150).springify().damping(20)}>
           <ContentRenderer blocks={post.content} />
         </Animated.View>
 
         {/* Footer */}
-        <View style={[styles.articleFooter, { borderTopColor: colors.borderLight }]}>
+        <View className="flex-row items-center justify-between mt-10 pt-5 border-t border-border-light">
           <Pressable
             onPress={() => router.back()}
-            style={({ pressed }) => [styles.footerBackBtn, pressed && { opacity: 0.6 }]}
+            className="py-1 active:opacity-60"
           >
-            <Text style={[styles.footerBackText, { color: colors.textMuted }]}>← 返回文章列表</Text>
+            <Text className="text-[13px] tracking-[0.3px] text-text-muted">← 返回文章列表</Text>
           </Pressable>
-          <Text style={[styles.footerSign, { color: colors.textLight }]}>— xiaoqianshuo</Text>
+          <Text className="text-xs tracking-[0.5px] text-text-light">— xiaoqianshuo</Text>
         </View>
 
         <View style={{ height: insets.bottom + 32 }} />
@@ -195,182 +206,3 @@ export default function BlogDetailScreen() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  progressTrack: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 2,
-    zIndex: 100,
-  },
-  progressBar: {
-    height: 2,
-    borderRadius: 1,
-  },
-  stickyHeader: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingBottom: 12,
-    borderBottomWidth: 1,
-  },
-  backBtn: {
-    paddingVertical: 6,
-    paddingRight: 12,
-    flexShrink: 0,
-    minWidth: 56,
-  },
-  backText: {
-    fontSize: 15,
-    fontWeight: '500',
-  },
-  stickyTitle: {
-    flex: 1,
-    fontSize: 14,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  scrollContent: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-  },
-  articleHeader: {
-    paddingTop: 20,
-    paddingBottom: 4,
-    gap: 12,
-  },
-  categoryPill: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 20,
-  },
-  categoryText: {
-    fontSize: 10,
-    fontWeight: '600',
-    letterSpacing: 1,
-  },
-  articleTitle: {
-    fontSize: 26,
-    fontWeight: '700',
-    lineHeight: 36,
-    letterSpacing: -0.5,
-  },
-  metaRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  metaText: {
-    fontSize: 12,
-    letterSpacing: 0.2,
-  },
-  metaDot: {
-    width: 3,
-    height: 3,
-    borderRadius: 2,
-  },
-  tags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 6,
-  },
-  tag: {
-    borderWidth: 1,
-    borderRadius: 4,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-  },
-  tagText: {
-    fontSize: 11,
-  },
-  divider: {
-    height: 1,
-    marginVertical: 24,
-  },
-  body: {
-    gap: 0,
-  },
-  articleFooter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 40,
-    paddingTop: 20,
-    borderTopWidth: 1,
-  },
-  footerBackBtn: {
-    paddingVertical: 4,
-  },
-  footerBackText: {
-    fontSize: 13,
-    letterSpacing: 0.3,
-  },
-  footerSign: {
-    fontSize: 12,
-    letterSpacing: 0.5,
-  },
-})
-
-const prose = StyleSheet.create({
-  h2Wrapper: {
-    marginTop: 28,
-    marginBottom: 12,
-    borderBottomWidth: 1,
-    paddingBottom: 8,
-  },
-  h2: {
-    fontSize: 18,
-    fontWeight: '700',
-    lineHeight: 26,
-    letterSpacing: -0.3,
-  },
-  p: {
-    fontSize: 15,
-    lineHeight: 26,
-    marginBottom: 16,
-  },
-  codeBlock: {
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 16,
-    marginVertical: 16,
-    overflow: 'hidden',
-  },
-  codeText: {
-    fontSize: 12,
-    lineHeight: 20,
-  },
-  ul: {
-    marginBottom: 16,
-    gap: 8,
-  },
-  liRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 10,
-  },
-  liBullet: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    borderWidth: 1.5,
-    marginTop: 9,
-    flexShrink: 0,
-  },
-  liText: {
-    flex: 1,
-    fontSize: 15,
-    lineHeight: 24,
-  },
-})

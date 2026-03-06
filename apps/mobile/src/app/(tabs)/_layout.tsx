@@ -1,12 +1,12 @@
-import { Tabs } from 'expo-router'
-import { Platform, View, Text, StyleSheet } from 'react-native'
-import { useTheme } from '@/lib/theme-context'
+import { useTheme } from '@/lib/theme-context';
+import { cn } from '@/lib/utils';
+import { Tabs } from 'expo-router';
+import { Platform, Text, View } from 'react-native';
 
-function TabIcon({ focused, icon, label }: { focused: boolean; icon: string; label: string }) {
-  const { colors } = useTheme()
+function TabIcon({ focused, icon }: { focused: boolean; icon: string; label: string }) {
   return (
-    <View style={tabStyles.iconWrapper}>
-      <Text style={[tabStyles.icon, { color: focused ? colors.accent : colors.textLight }]}>{icon}</Text>
+    <View className="items-center justify-center">
+      <Text className={cn(['text-lg', focused ? 'color-accent' : 'color-text-light'])}>{icon}</Text>
     </View>
   )
 }
@@ -66,13 +66,3 @@ export default function TabsLayout() {
     </Tabs>
   )
 }
-
-const tabStyles = StyleSheet.create({
-  iconWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  icon: {
-    fontSize: 18,
-  },
-})
