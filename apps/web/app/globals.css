@@ -28,6 +28,7 @@
   --tag-tech:     #E8F2FF;
   --tag-life:     #FFF0E8;
   --tag-essay:    #F0EEFF;
+  --text-on-accent: #ffffff;
 }
 
 /* ── Sky · Dark ───────────────────────────────── */
@@ -50,6 +51,7 @@
   --tag-tech:     #0F2540;
   --tag-life:     #2E1A0E;
   --tag-essay:    #1C1A38;
+  --text-on-accent: #0C1A2E;
 }
 
 /* ── Jade · Light ─────────────────────────────── */
@@ -73,6 +75,7 @@
   --tag-tech:     #EDF3ED;
   --tag-life:     #F5EEE5;
   --tag-essay:    #EDEAF5;
+  --text-on-accent: #ffffff;
 }
 
 /* ── Jade · Dark ──────────────────────────────── */
@@ -95,6 +98,7 @@
   --tag-tech:     #182018;
   --tag-life:     #281E10;
   --tag-essay:    #1E1A2E;
+  --text-on-accent: #161A16;
 }
 
 @theme inline {

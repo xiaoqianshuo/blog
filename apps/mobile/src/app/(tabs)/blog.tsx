@@ -92,7 +92,7 @@ export default function BlogScreen() {
                     style={[
                       styles.filterChipText,
                       { color: colors.textMuted },
-                      active && styles.filterChipTextActive,
+                      active && { color: colors.bgCard, fontWeight: '500' as const },
                     ]}
                   >
                     {cat}
@@ -183,7 +183,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   filterChipTextActive: {
-    color: '#fff',
     fontWeight: '500',
   },
   divider: {

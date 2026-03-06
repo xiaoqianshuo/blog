@@ -29,14 +29,14 @@ function ContentRenderer({ blocks }: { blocks: ContentBlock[] }) {
             )
           case 'p':
             return (
-              <Text key={i} style={[prose.p, { fontFamily: fonts.serif }]}>
+              <Text key={i} style={[prose.p, { fontFamily: fonts.serif, color: colors.textMuted }]}>
                 {block.text}
               </Text>
             )
           case 'code':
             return (
-              <View key={i} style={[prose.codeBlock, { borderColor: colors.border }]}>
-                <Text style={[prose.codeText, { fontFamily: fonts.mono }]}>{block.text}</Text>
+              <View key={i} style={[prose.codeBlock, { backgroundColor: colors.bgSubtle, borderColor: colors.border }]}>
+                <Text style={[prose.codeText, { fontFamily: fonts.mono, color: colors.textMuted }]}>{block.text}</Text>
               </View>
             )
           case 'ul':
@@ -45,7 +45,7 @@ function ContentRenderer({ blocks }: { blocks: ContentBlock[] }) {
                 {block.items.map((item, j) => (
                   <View key={j} style={prose.liRow}>
                     <View style={[prose.liBullet, { backgroundColor: colors.accentPale, borderColor: colors.accentMid }]} />
-                    <Text style={[prose.liText, { fontFamily: fonts.serif }]}>{item}</Text>
+                    <Text style={[prose.liText, { fontFamily: fonts.serif, color: colors.textMuted }]}>{item}</Text>
                   </View>
                 ))}
               </View>
@@ -100,7 +100,7 @@ export default function BlogDetailScreen() {
       </View>
 
       {/* Floating sticky header */}
-      <View style={[styles.stickyHeader, { paddingTop: insets.top, borderBottomColor: colors.borderLight }]}>
+      <View style={[styles.stickyHeader, { paddingTop: insets.top, borderBottomColor: colors.borderLight, backgroundColor: colors.bgCard + 'EB' }]}>
         <Pressable onPress={() => router.back()} style={styles.backBtn}>
           <Text
             style={[styles.backText, { color: colors.accent }]}
@@ -222,7 +222,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingBottom: 12,
-    backgroundColor: 'rgba(250, 250, 247, 0.92)',
     borderBottomWidth: 1,
   },
   backBtn: {
@@ -338,12 +337,10 @@ const prose = StyleSheet.create({
   },
   p: {
     fontSize: 15,
-    color: '#3D3D3D',
     lineHeight: 26,
     marginBottom: 16,
   },
   codeBlock: {
-    backgroundColor: '#F0EEE9',
     borderWidth: 1,
     borderRadius: 10,
     padding: 16,
@@ -352,7 +349,6 @@ const prose = StyleSheet.create({
   },
   codeText: {
     fontSize: 12,
-    color: '#3D3D3D',
     lineHeight: 20,
   },
   ul: {
@@ -375,7 +371,6 @@ const prose = StyleSheet.create({
   liText: {
     flex: 1,
     fontSize: 15,
-    color: '#3D3D3D',
     lineHeight: 24,
   },
 })
