@@ -97,7 +97,7 @@ export default function AboutScreen() {
             <Pressable
               key={link.label}
               onPress={() => Linking.openURL(link.url)}
-              className={cn("flex-row items-center px-4 py-3.5 gap-3 active:opacity-60", i < links.length - 1 ? "border-b border-b-border-light" : "")}
+              className={cn("flex-row items-center px-4 py-3.5 gap-3 active:opacity-60", i < links.length - 1 && "border-b border-border-light")}
             >
               <Text className="text-sm w-5 text-center text-accent">{link.icon}</Text>
               <Text className="flex-1 text-sm tracking-[0.2px] text-text-primary">{link.label}</Text>
@@ -113,18 +113,19 @@ export default function AboutScreen() {
 
         {/* Theme palette */}
         <Text className="text-[11px] tracking-[0.5px] mb-2 text-text-light">主题色彩</Text>
-        <View className="flex-row gap-3 mb-4">
+        <View className="flex-row flex-wrap gap-2 mb-4">
           {(Object.entries(themeLabels) as [ThemeName, typeof themeLabels[ThemeName]][]).map(([id, t]) => {
             const active = themeName === id
             return (
               <Pressable
                 key={id}
                 onPress={() => setTheme(id)}
-                className={cn('flex-1 rounded-xl border p-4 gap-1.5', active ? 'border-accent' : 'border-border', active ? 'bg-bg-subtle' : 'bg-bg-card')}
+                className={cn('rounded-xl border p-3 gap-1 active:opacity-80', active ? 'border-accent bg-bg-subtle' : 'border-border bg-bg-card')}
+                style={{ width: '31%' }}
               >
-                <View style={{ backgroundColor: t.dot }} className="w-2.5 h-2.5 rounded-full mb-1" />
+                <View style={{ backgroundColor: t.dot }} className="w-2.5 h-2.5 rounded-full mb-0.5" />
                 <Text className="text-sm font-semibold text-text-primary">{t.label}</Text>
-                <Text className="text-[11px] tracking-[0.2px] text-text-muted">{t.desc}</Text>
+                <Text className="text-[10px] tracking-[0.2px] text-text-muted" numberOfLines={1}>{t.desc}</Text>
               </Pressable>
             )
           })}
@@ -139,14 +140,12 @@ export default function AboutScreen() {
               <Pressable
                 key={m.id}
                 onPress={() => setMode(m.id)}
-                className={cn('flex-1 flex-row items-center justify-center gap-1.5 py-2.5 rounded-[9px] border', active ? 'bg-bg-card border-accent' : 'bg-bg-subtle border-transparent')}
+                className={cn('flex-1 flex-row items-center justify-center gap-1.5 py-2.5 rounded-[9px] border', active ? 'bg-bg-card border-accent' : 'border-transparent')}
               >
-                <Text className={cn('text-[13px] leading-4', active ? 'color-accent' : 'color-text-light')}>
+                <Text className={cn('text-[13px] leading-4', active ? 'text-accent' : 'text-text-light')}>
                   {m.icon}
                 </Text>
-                <Text
-                  className={cn('text-[13px] font-medium', active ? 'color-text-primary' : 'color-text-muted')}
-                >
+                <Text className={cn('text-[13px] font-medium', active ? 'text-text-primary' : 'text-text-muted')}>
                   {m.label}
                 </Text>
               </Pressable>
