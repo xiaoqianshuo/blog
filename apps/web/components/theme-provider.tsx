@@ -17,7 +17,6 @@ const ThemeContext = createContext<ThemeContextValue>({
   setTheme: () => {}, setMode: () => {},
 })
 
-// Custom events to notify useSyncExternalStore when values change within the same tab
 const THEME_KEY = 'blog-theme'
 const MODE_KEY  = 'blog-mode'
 const EV_THEME  = 'blog-theme-change'
@@ -33,10 +32,8 @@ function subscribe(cb: () => void) {
 }
 
 const THEMES: Theme[] = ['sky', 'jade', 'rose', 'amber', 'dusk', 'ink']
-const getTheme  = (): Theme => { const v = localStorage.getItem(THEME_KEY); return THEMES.includes(v as Theme) ? v as Theme : 'jade' }
-const getMode   = (): Mode  => { const v = localStorage.getItem(MODE_KEY);  return v === 'light' || v === 'dark' || v === 'auto' ? v : 'auto' }
-const ssrTheme  = (): Theme => 'jade'
-const ssrMode   = (): Mode  => 'auto'
+const getTheme = (): Theme => { const v = localStorage.getItem(THEME_KEY); return THEMES.includes(v as Theme) ? v as Theme : 'jade' }
+const getMode  = (): Mode  => { const v = localStorage.getItem(MODE_KEY);  return v === 'light' || v === 'dark' || v === 'auto' ? v : 'auto' }
 
 function resolveScheme(mode: Mode): 'light' | 'dark' {
   if (mode === 'light') return 'light'
@@ -47,14 +44,30 @@ function resolveScheme(mode: Mode): 'light' | 'dark' {
 function applyAttrs(theme: Theme, mode: Mode) {
   document.documentElement.setAttribute('data-theme', theme)
   document.documentElement.setAttribute('data-scheme', resolveScheme(mode))
+  document.documentElement.setAttribute('data-mode', mode)
 }
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // useSyncExternalStore: server returns ssrTheme/ssrMode, client reads localStorage
-  const theme = useSyncExternalStore(subscribe, getTheme, ssrTheme)
-  const mode  = useSyncExternalStore(subscribe, getMode,  ssrMode)
+/** Keep theme + mode cookies in sync so server can SSR with correct values on next request */
+function syncCookies(theme: Theme, mode: Mode) {
+  document.cookie = `blog-theme=${theme};path=/;max-age=31536000;SameSite=Lax`
+  document.cookie = `blog-mode=${mode};path=/;max-age=31536000;SameSite=Lax`
+}
 
-  // Keep DOM attrs in sync
+export function ThemeProvider({
+  children,
+  initialTheme = 'jade',
+  initialMode  = 'auto',
+}: {
+  children: React.ReactNode
+  initialTheme?: Theme
+  initialMode?: Mode
+}) {
+  // Server snapshot uses cookie-derived initial values — matches server-rendered HTML exactly,
+  // so useSyncExternalStore detects no mismatch and skips the re-render that caused the jump.
+  const theme = useSyncExternalStore(subscribe, getTheme, () => initialTheme)
+  const mode  = useSyncExternalStore(subscribe, getMode,  () => initialMode)
+
+  // Keep DOM attrs in sync after client-side changes
   useEffect(() => { applyAttrs(theme, mode) }, [theme, mode])
 
   // Watch system preference when mode === 'auto'
@@ -68,12 +81,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = (t: Theme) => {
     localStorage.setItem(THEME_KEY, t)
+    syncCookies(t, mode)
     window.dispatchEvent(new Event(EV_THEME))
     applyAttrs(t, mode)
   }
 
   const setMode = (m: Mode) => {
     localStorage.setItem(MODE_KEY, m)
+    syncCookies(theme, m)
     window.dispatchEvent(new Event(EV_MODE))
     applyAttrs(theme, m)
   }
