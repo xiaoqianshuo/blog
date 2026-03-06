@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useSyncExternalStore, useEffect } from 'react'
 
-export type Theme = 'sky' | 'jade'
+export type Theme = 'sky' | 'jade' | 'rose' | 'amber' | 'dusk' | 'ink'
 export type Mode  = 'auto' | 'light' | 'dark'
 
 interface ThemeContextValue {
@@ -32,7 +32,8 @@ function subscribe(cb: () => void) {
   }
 }
 
-const getTheme  = (): Theme => { const v = localStorage.getItem(THEME_KEY); return v === 'sky' || v === 'jade' ? v : 'jade' }
+const THEMES: Theme[] = ['sky', 'jade', 'rose', 'amber', 'dusk', 'ink']
+const getTheme  = (): Theme => { const v = localStorage.getItem(THEME_KEY); return THEMES.includes(v as Theme) ? v as Theme : 'jade' }
 const getMode   = (): Mode  => { const v = localStorage.getItem(MODE_KEY);  return v === 'light' || v === 'dark' || v === 'auto' ? v : 'auto' }
 const ssrTheme  = (): Theme => 'jade'
 const ssrMode   = (): Mode  => 'auto'

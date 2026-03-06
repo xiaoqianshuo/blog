@@ -1,10 +1,14 @@
 'use client'
 
-import { useTheme, type Theme, type Mode } from './theme-provider'
+import { useTheme, type Mode, type Theme } from './theme-provider';
 
 const themes: { id: Theme; label: string; dot: string }[] = [
-  { id: 'sky',  label: '天蓝', dot: '#3B8EFF' },
-  { id: 'jade', label: '苔绿', dot: '#7A9E7A' },
+  { id: 'jade',  label: '苔绿', dot: '#7A9E7A' },
+  { id: 'sky',   label: '天蓝', dot: '#3B8EFF' },
+  { id: 'rose',  label: '玫瑰', dot: '#C4616A' },
+  { id: 'amber', label: '琥珀', dot: '#C4841E' },
+  { id: 'dusk',  label: '暮色', dot: '#7B5EA7' },
+  { id: 'ink',   label: '水墨', dot: '#C04040' },
 ]
 
 const modes: { id: Mode; icon: string; label: string }[] = [
@@ -24,10 +28,12 @@ export default function ThemeToggle() {
           const active = theme === t.id
           return (
             <button key={t.id} onClick={() => setTheme(t.id)} title={t.label} style={chipStyle(active)}>
-              <span style={{ ...dotStyle, background: t.dot, opacity: active ? 1 : 0.45 }} />
-              <span style={{ color: active ? 'var(--text)' : 'var(--text-light)', fontSize: '0.72rem', letterSpacing: '0.04em', fontWeight: active ? 500 : 400 }}>
-                {t.label}
-              </span>
+              <span style={{ ...dotStyle, background: t.dot, opacity: active ? 1 : 0.5 }} />
+              {active && (
+                <span style={{ color: 'var(--text)', fontSize: '0.72rem', letterSpacing: '0.04em', fontWeight: 500 }}>
+                  {t.label}
+                </span>
+              )}
             </button>
           )
         })}
