@@ -9,6 +9,7 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "build:web": "expo export --platform web",
     "build:ios": "eas build --clear-cache --platform ios",
     "build:android": "eas build --clear-cache --platform android",
     "build:dev:ios": "pnpm build:ios --profile development",
