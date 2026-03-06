@@ -1,6 +1,7 @@
-import { Stack } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
-import { ThemeProvider, useTheme } from '@/lib/theme-context'
+import { ThemeProvider, useTheme } from '@/lib/theme-context';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import '../../assets/css/global.css';
 
 function AppStack() {
   const { effectiveScheme, colors } = useTheme()
