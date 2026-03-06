@@ -1,5 +1,5 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native'
 import { useTheme } from '@/lib/theme-context'
+import { Pressable, Text, View } from 'react-native'
 
 interface SectionHeaderProps {
   title: string
@@ -14,44 +14,26 @@ export default function SectionHeader({
   onMore,
   moreLabel = '全部 →',
 }: SectionHeaderProps) {
-  const { colors, fonts } = useTheme()
+  const { fonts } = useTheme()
 
   return (
-    <View style={styles.container}>
-      <View style={styles.left}>
-        <Text style={[styles.title, { color: colors.text, fontFamily: fonts.serif }]}>{title}</Text>
-        {subtitle && <Text style={[styles.subtitle, { color: colors.textMuted }]}>{subtitle}</Text>}
+    <View className="flex-row items-baseline justify-between mb-3.5">
+      <View className="gap-0.5">
+        <Text
+          style={{ fontFamily: fonts.serif }}
+          className="text-text-primary text-[17px] font-bold tracking-[-0.3px]"
+        >
+          {title}
+        </Text>
+        {subtitle && (
+          <Text className="text-xs mt-0.5 text-text-muted">{subtitle}</Text>
+        )}
       </View>
       {onMore && (
         <Pressable onPress={onMore}>
-          <Text style={[styles.more, { color: colors.accent }]}>{moreLabel}</Text>
+          <Text className="text-[13px] tracking-[0.3px] text-accent">{moreLabel}</Text>
         </Pressable>
       )}
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    marginBottom: 14,
-  },
-  left: {
-    gap: 2,
-  },
-  title: {
-    fontSize: 17,
-    fontWeight: '700',
-    letterSpacing: -0.3,
-  },
-  subtitle: {
-    fontSize: 12,
-    marginTop: 2,
-  },
-  more: {
-    fontSize: 13,
-    letterSpacing: 0.3,
-  },
-})
