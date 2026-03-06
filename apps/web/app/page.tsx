@@ -108,7 +108,7 @@ export default function Home() {
               letterSpacing: '0.06em',
               padding: '0.7rem 1.75rem',
               background: 'var(--accent)',
-              color: '#fff',
+              color: 'var(--text-on-accent)',
               borderRadius: '100px',
               fontWeight: 500,
               transition: 'background 0.2s, transform 0.2s',
