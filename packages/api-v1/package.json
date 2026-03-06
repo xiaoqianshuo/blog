@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "build:prod": "rimraf dist && tsup --minify",
+    "build:prod": "rimraf dist && BASE_URL=http://xiaoqianshuo.work/api tsup --minify",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'"
   },
   "dependencies": {

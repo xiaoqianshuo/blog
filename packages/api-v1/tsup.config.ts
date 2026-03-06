@@ -8,4 +8,7 @@ export default defineConfig({
   splitting: false,
   clean: true,
   external: ['zod'],
+  define: {
+    'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+  },
 });
