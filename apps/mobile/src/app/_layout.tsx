@@ -1,6 +1,9 @@
 import { ThemeProvider, useTheme } from '@/lib/theme-context';
+import * as Device from 'expo-device';
 import { Stack } from 'expo-router';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import '../../assets/css/global.css';
 
 function AppStack() {
@@ -29,6 +32,15 @@ function AppStack() {
 }
 
 export default function RootLayout() {
+  useEffect(() => {
+    const isTablet = Device.deviceType === Device.DeviceType.TABLET;
+    if (isTablet) {
+      ScreenOrientation.unlockAsync();
+    } else {
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    }
+  }, []);
+
   return (
     <ThemeProvider>
       <AppStack />

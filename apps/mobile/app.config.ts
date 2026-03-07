@@ -5,7 +5,7 @@ const config: ExpoConfig = {
   name: '晓千烁的小黑屋',
   slug: 'blog',
   version: packageJson.version,
-  orientation: 'portrait',
+  orientation: 'default',
   icon: './assets/images/icon.png',
   scheme: 'blog',
   userInterfaceStyle: 'automatic',
@@ -38,6 +38,7 @@ const config: ExpoConfig = {
   },
   plugins: [
     'expo-router',
+    'expo-screen-orientation',
     [
       'expo-splash-screen',
       {
