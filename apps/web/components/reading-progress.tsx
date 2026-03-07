@@ -17,25 +17,10 @@ export default function ReadingProgress() {
   }, [])
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '2px',
-        background: 'var(--border-light)',
-        zIndex: 100,
-      }}
-    >
+    <div className="fixed top-0 left-0 right-0 h-0.5 bg-border-light z-100">
       <div
-        style={{
-          height: '100%',
-          width: `${progress}%`,
-          background: 'var(--accent)',
-          transition: 'width 0.1s linear',
-          borderRadius: '0 2px 2px 0',
-        }}
+        className="h-full bg-accent transition-[width] duration-100 rounded-[0_2px_2px_0]"
+        style={{ width: `${progress}%` }}
       />
     </div>
   )

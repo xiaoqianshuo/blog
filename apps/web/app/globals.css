@@ -290,8 +290,31 @@
 }
 
 @theme inline {
-  --color-background: var(--bg);
-  --color-foreground: var(--text);
+  /* Backgrounds */
+  --color-bg:              var(--bg);
+  --color-bg-card:         var(--bg-card);
+  --color-bg-subtle:       var(--bg-subtle);
+  --color-bg-nav:          var(--bg-nav);
+  /* Text */
+  --color-text:            var(--text);
+  --color-text-muted:      var(--text-muted);
+  --color-text-light:      var(--text-light);
+  --color-text-on-accent:  var(--text-on-accent);
+  /* Accent */
+  --color-accent:          var(--accent);
+  --color-accent-mid:      var(--accent-mid);
+  --color-accent-pale:     var(--accent-pale);
+  --color-accent-deep:     var(--accent-deep);
+  --color-accent-warm:     var(--accent-warm);
+  --color-accent-muted:    var(--accent-muted);
+  /* Borders */
+  --color-border:          var(--border);
+  --color-border-light:    var(--border-light);
+  /* Tags */
+  --color-tag-tech:        var(--tag-tech);
+  --color-tag-life:        var(--tag-life);
+  --color-tag-essay:       var(--tag-essay);
+  /* Fonts */
   --font-serif: 'Lora', 'Hiragino Mincho ProN', 'Yu Mincho', 'STSong', 'SimSun', Georgia, serif;
   --font-sans:  'Inter', 'Hiragino Sans', 'PingFang SC', 'Noto Sans SC', sans-serif;
   --font-mono:  'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
@@ -401,10 +424,16 @@ a {
   font-style: italic;
 }
 
-/* ── Utilities ───────────────────────────────── */
-.font-sans { font-family: var(--font-sans); }
-.font-serif { font-family: var(--font-serif); }
-.font-mono { font-family: var(--font-mono); }
+/* ── Nav responsive ──────────────────────────── */
+.nav-link:hover { color: var(--text) !important; }
+
+.nav-desktop-only { display: flex; }
+.nav-mobile-only  { display: none;  }
+
+@media (max-width: 640px) {
+  .nav-desktop-only { display: none !important; }
+  .nav-mobile-only  { display: flex !important; }
+}
 
 /* ── Animations ──────────────────────────────── */
 @keyframes fadeUp {

@@ -13,67 +13,22 @@ const skills = [
 
 export default function AboutPage() {
   return (
-    <div
-      style={{
-        maxWidth: '1080px',
-        margin: '0 auto',
-        padding: '4rem 2rem 6rem',
-      }}
-    >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(480px, 1fr))',
-          gap: '4rem',
-          alignItems: 'start',
-        }}
-      >
+    <div className="max-w-270 mx-auto px-8 pt-16 pb-24">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(480px,1fr))] gap-16 items-start">
         {/* Left: Bio */}
         <div
-          style={{
-            opacity: 0,
-            animation: 'fadeUp 0.6s ease 0.1s forwards',
-          }}
+          style={{ opacity: 0, animation: 'fadeUp 0.6s ease 0.1s forwards' }}
         >
-          <p
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.72rem',
-              letterSpacing: '0.2em',
-              color: 'var(--accent)',
-              textTransform: 'uppercase',
-              marginBottom: '0.75rem',
-            }}
-          >
+          <p className="font-sans text-[0.72rem] tracking-[0.2em] text-accent uppercase mb-3">
             About Me
           </p>
 
-          <h1
-            style={{
-              fontSize: '2rem',
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              marginBottom: '2rem',
-            }}
-          >
+          <h1 className="text-[2rem] font-bold tracking-[-0.02em] mb-8">
             关于我
           </h1>
 
           {/* Avatar placeholder */}
-          <div
-            style={{
-              width: '72px',
-              height: '72px',
-              borderRadius: '50%',
-              background: 'var(--accent-pale)',
-              border: '2px solid var(--accent-mid)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.75rem',
-              marginBottom: '1.5rem',
-            }}
-          >
+          <div className="w-18 h-18 rounded-full bg-accent-pale border-2 border-accent-mid flex items-center justify-center text-[1.75rem] mb-6">
             🌿
           </div>
 
@@ -94,7 +49,7 @@ export default function AboutPage() {
               如果你对我的文章感兴趣，欢迎通过邮件联系：
               <a
                 href="mailto:xiaoqianshuo@163.com"
-                style={{ color: 'var(--accent)', borderBottom: '1px solid var(--accent-pale)' }}
+                className="text-accent border-b border-accent-pale"
               >
                 xiaoqianshuo@163.com
               </a>
@@ -104,43 +59,20 @@ export default function AboutPage() {
 
         {/* Right: Skills & Info */}
         <div
-          style={{
-            opacity: 0,
-            animation: 'fadeUp 0.6s ease 0.25s forwards',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2rem',
-          }}
+          className="flex flex-col gap-8"
+          style={{ opacity: 0, animation: 'fadeUp 0.6s ease 0.25s forwards' }}
         >
           {/* Skills */}
           {skills.map((group) => (
             <div key={group.label}>
-              <p
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.72rem',
-                  letterSpacing: '0.15em',
-                  color: 'var(--text-muted)',
-                  textTransform: 'uppercase',
-                  marginBottom: '0.75rem',
-                }}
-              >
+              <p className="font-sans text-[0.72rem] tracking-[0.15em] text-text-muted uppercase mb-3">
                 {group.label}
               </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <div className="flex flex-wrap gap-2">
                 {group.items.map((item) => (
                   <span
                     key={item}
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.8rem',
-                      color: 'var(--text)',
-                      background: 'var(--bg-subtle)',
-                      border: '1px solid var(--border)',
-                      borderRadius: '6px',
-                      padding: '0.35rem 0.75rem',
-                      letterSpacing: '0.02em',
-                    }}
+                    className="font-sans text-[0.8rem] text-text bg-bg-subtle border border-border rounded-md py-[0.35rem] px-3 tracking-[0.02em]"
                   >
                     {item}
                   </span>
@@ -150,25 +82,8 @@ export default function AboutPage() {
           ))}
 
           {/* Quote */}
-          <div
-            style={{
-              marginTop: '1rem',
-              padding: '1.25rem 1.5rem',
-              background: 'var(--bg-subtle)',
-              borderRadius: '10px',
-              borderLeft: '3px solid var(--accent-pale)',
-            }}
-          >
-            <p
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '0.95rem',
-                color: 'var(--text-muted)',
-                fontStyle: 'italic',
-                lineHeight: 1.8,
-                margin: 0,
-              }}
-            >
+          <div className="mt-4 py-5 px-6 bg-bg-subtle rounded-[10px] border-l-[3px] border-accent-pale">
+            <p className="font-serif text-[0.95rem] text-text-muted italic leading-[1.8] m-0">
               「时间是最好的编辑，
               <br />
               　而写作是最诚实的自我审视。」
@@ -177,19 +92,10 @@ export default function AboutPage() {
 
           {/* Links */}
           <div>
-            <p
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.72rem',
-                letterSpacing: '0.15em',
-                color: 'var(--text-muted)',
-                textTransform: 'uppercase',
-                marginBottom: '0.75rem',
-              }}
-            >
+            <p className="font-sans text-[0.72rem] tracking-[0.15em] text-text-muted uppercase mb-3">
               Links
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <div className="flex flex-col gap-2">
               {[
                 { label: 'GitHub', href: 'https://github.com/xiaoqianshuo', icon: '⌥' },
                 { label: 'Homepage', href: 'http://xiaoqianshuo.work', icon: '◎' },
@@ -200,19 +106,9 @@ export default function AboutPage() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: '0.85rem',
-                    color: 'var(--text-muted)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.5rem 0',
-                    borderBottom: '1px solid var(--border-light)',
-                    transition: 'color 0.2s',
-                  }}
+                  className="font-sans text-[0.85rem] text-text-muted flex items-center gap-2 py-2 border-b border-border-light transition-colors duration-200"
                 >
-                  <span style={{ color: 'var(--accent)', fontSize: '0.8rem' }}>{link.icon}</span>
+                  <span className="text-accent text-[0.8rem]">{link.icon}</span>
                   {link.label}
                 </a>
               ))}

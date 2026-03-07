@@ -21,16 +21,24 @@ export default function ThemeToggle() {
   const { theme, mode, setTheme, setMode } = useTheme()
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+    <div className="flex items-center gap-1.5">
       {/* Theme palette switcher */}
-      <div style={pillStyle}>
+      <div className="flex items-center gap-0.5 bg-bg-subtle border border-border rounded-full p-0.75">
         {themes.map((t) => {
           const active = theme === t.id
           return (
-            <button key={t.id} onClick={() => setTheme(t.id)} title={t.label} style={chipStyle(active)}>
-              <span style={{ ...dotStyle, background: t.dot, opacity: active ? 1 : 0.5 }} />
+            <button
+              key={t.id}
+              onClick={() => setTheme(t.id)}
+              title={t.label}
+              className={`flex items-center gap-1 px-2 py-0.75 rounded-full border-0 cursor-pointer transition-all duration-180 whitespace-nowrap ${active ? 'bg-bg-card shadow-[0_1px_4px_rgba(0,0,0,0.08)]' : 'bg-transparent'}`}
+            >
+              <span
+                className="inline-block w-1.75 h-1.75 rounded-full shrink-0 transition-opacity duration-180"
+                style={{ background: t.dot, opacity: active ? 1 : 0.5 }}
+              />
               {active && (
-                <span style={{ color: 'var(--text)', fontSize: '0.72rem', letterSpacing: '0.04em', fontWeight: 500 }}>
+                <span className="text-text text-[0.72rem] tracking-[0.04em] font-medium">
                   {t.label}
                 </span>
               )}
@@ -40,18 +48,23 @@ export default function ThemeToggle() {
       </div>
 
       {/* Divider */}
-      <div style={{ width: '1px', height: '16px', background: 'var(--border)', flexShrink: 0 }} />
+      <div className="w-px h-4 bg-border shrink-0" />
 
       {/* Mode switcher */}
-      <div style={pillStyle}>
+      <div className="flex items-center gap-0.5 bg-bg-subtle border border-border rounded-full p-0.75">
         {modes.map((m) => {
           const active = mode === m.id
           return (
-            <button key={m.id} onClick={() => setMode(m.id)} title={m.label} style={chipStyle(active)}>
-              <span style={{ fontSize: '0.75rem', color: active ? 'var(--accent)' : 'var(--text-light)', lineHeight: 1 }}>
+            <button
+              key={m.id}
+              onClick={() => setMode(m.id)}
+              title={m.label}
+              className={`flex items-center gap-1 px-2 py-0.75 rounded-full border-0 cursor-pointer transition-all duration-180 whitespace-nowrap ${active ? 'bg-bg-card shadow-[0_1px_4px_rgba(0,0,0,0.08)]' : 'bg-transparent'}`}
+            >
+              <span className={`text-xs leading-none ${active ? 'text-accent' : 'text-text-light'}`}>
                 {m.icon}
               </span>
-              <span style={{ color: active ? 'var(--text)' : 'var(--text-light)', fontSize: '0.72rem', letterSpacing: '0.04em', fontWeight: active ? 500 : 400 }}>
+              <span className={`text-[0.72rem] tracking-[0.04em] ${active ? 'text-text font-medium' : 'text-text-light font-normal'}`}>
                 {m.label}
               </span>
             </button>
@@ -60,39 +73,4 @@ export default function ThemeToggle() {
       </div>
     </div>
   )
-}
-
-const pillStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '2px',
-  background: 'var(--bg-subtle)',
-  border: '1px solid var(--border)',
-  borderRadius: '100px',
-  padding: '3px',
-}
-
-function chipStyle(active: boolean): React.CSSProperties {
-  return {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '4px',
-    padding: '3px 8px',
-    borderRadius: '100px',
-    border: 'none',
-    cursor: 'pointer',
-    background: active ? 'var(--bg-card)' : 'transparent',
-    boxShadow: active ? '0 1px 4px rgba(0,0,0,0.08)' : 'none',
-    transition: 'all 0.18s ease',
-    whiteSpace: 'nowrap' as const,
-  }
-}
-
-const dotStyle: React.CSSProperties = {
-  display: 'inline-block',
-  width: '7px',
-  height: '7px',
-  borderRadius: '50%',
-  flexShrink: 0,
-  transition: 'opacity 0.18s',
 }

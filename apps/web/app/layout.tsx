@@ -49,7 +49,7 @@ export default async function RootLayout({
       <body>
         <ThemeProvider initialTheme={theme} initialMode={mode}>
           <Nav />
-          <main style={{ minHeight: 'calc(100vh - 64px)' }}>{children}</main>
+          <main className="min-h-[calc(100vh-4rem)]">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

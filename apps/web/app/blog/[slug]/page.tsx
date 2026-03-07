@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import ReadingProgress from '@/components/reading-progress'
 import { getPostBySlug, posts } from '@/lib/blog-data'
-import { formatDate, categoryColor, categoryBg } from '@/lib/utils'
+import { categoryBg, categoryColor, formatDate } from '@/lib/utils'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -32,111 +32,51 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <ReadingProgress />
 
-      <article
-        style={{
-          maxWidth: '1080px',
-          margin: '0 auto',
-          padding: '3rem 2rem 6rem',
-        }}
-      >
+      <article className="max-w-270 mx-auto px-8 pt-12 pb-24">
         {/* Back link */}
         <Link
           href="/blog"
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '0.8rem',
-            color: 'var(--text-muted)',
-            letterSpacing: '0.04em',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.35rem',
-            marginBottom: '2.5rem',
-            transition: 'color 0.2s',
-          }}
+          className="font-sans text-[0.8rem] text-text-muted tracking-[0.04em] inline-flex items-center gap-[0.35rem] mb-10 transition-colors duration-200"
         >
           ← 返回文章列表
         </Link>
 
         {/* Article Header */}
         <header
-          style={{
-            maxWidth: '700px',
-            marginBottom: '3rem',
-            opacity: 0,
-            animation: 'fadeUp 0.6s ease 0.05s forwards',
-          }}
+          className="max-w-175 mb-12"
+          style={{ opacity: 0, animation: 'fadeUp 0.6s ease 0.05s forwards' }}
         >
           {/* Category */}
           <span
+            className="font-sans text-[0.7rem] font-medium tracking-[0.08em] py-[0.2rem] px-[0.7rem] rounded-full inline-block mb-5"
             style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.7rem',
-              fontWeight: 500,
-              letterSpacing: '0.08em',
               color: categoryColor[post.category] ?? 'var(--accent)',
               background: categoryBg[post.category] ?? 'var(--tag-tech)',
-              padding: '0.2rem 0.7rem',
-              borderRadius: '20px',
-              display: 'inline-block',
-              marginBottom: '1.25rem',
             }}
           >
             {post.category}
           </span>
 
           <h1
-            style={{
-              fontSize: 'clamp(1.6rem, 4vw, 2.2rem)',
-              fontWeight: 700,
-              lineHeight: 1.25,
-              letterSpacing: '-0.02em',
-              marginBottom: '1.25rem',
-            }}
+            className="font-bold leading-tight tracking-[-0.02em] mb-5"
+            style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)' }}
           >
             {post.title}
           </h1>
 
           {/* Meta */}
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              gap: '1rem',
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.8rem',
-              color: 'var(--text-muted)',
-            }}
-          >
+          <div className="flex flex-wrap items-center gap-4 font-sans text-[0.8rem] text-text-muted">
             <span>{formatDate(post.date)}</span>
-            <span
-              style={{
-                width: '3px',
-                height: '3px',
-                borderRadius: '50%',
-                background: 'var(--border)',
-                display: 'inline-block',
-              }}
-            />
+            <span className="w-0.75 h-0.75 rounded-full bg-border inline-block" />
             <span>{post.readingTime} 分钟阅读</span>
           </div>
 
           {/* Tags */}
-          <div
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '1.25rem' }}
-          >
+          <div className="flex flex-wrap gap-[0.4rem] mt-5">
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.72rem',
-                  color: 'var(--text-muted)',
-                  background: 'var(--bg-subtle)',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: '4px',
-                  padding: '0.2rem 0.55rem',
-                }}
+                className="font-sans text-[0.72rem] text-text-muted bg-bg-subtle border border-border-light rounded py-[0.2rem] px-[0.55rem]"
               >
                 # {tag}
               </span>
@@ -145,55 +85,24 @@ export default async function BlogPostPage({ params }: Props) {
         </header>
 
         {/* Divider */}
-        <div
-          style={{
-            maxWidth: '700px',
-            borderTop: '1px solid var(--border-light)',
-            marginBottom: '2.5rem',
-          }}
-        />
+        <div className="max-w-175 border-t border-border-light mb-10" />
 
         {/* Article Content */}
         <div
           className="prose"
-          style={{
-            opacity: 0,
-            animation: 'fadeUp 0.6s ease 0.2s forwards',
-          }}
+          style={{ opacity: 0, animation: 'fadeUp 0.6s ease 0.2s forwards' }}
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
         {/* Article Footer */}
-        <div
-          style={{
-            maxWidth: '700px',
-            marginTop: '4rem',
-            paddingTop: '2rem',
-            borderTop: '1px solid var(--border-light)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
+        <div className="max-w-175 mt-16 pt-8 border-t border-border-light flex items-center justify-between">
           <Link
             href="/blog"
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.8rem',
-              color: 'var(--text-muted)',
-              letterSpacing: '0.04em',
-            }}
+            className="font-sans text-[0.8rem] text-text-muted tracking-[0.04em]"
           >
             ← 返回文章列表
           </Link>
-          <p
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.75rem',
-              color: 'var(--text-light)',
-              margin: 0,
-            }}
-          >
+          <p className="font-sans text-xs text-text-light m-0">
             — xiaoqianshuo
           </p>
         </div>

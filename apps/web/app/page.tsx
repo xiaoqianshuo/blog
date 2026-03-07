@@ -10,50 +10,23 @@ export default function Home() {
   return (
     <div>
       {/* ── Hero ─────────────────────────────────── */}
-      <section
-        style={{
-          maxWidth: '1080px',
-          margin: '0 auto',
-          padding: '6rem 2rem 5rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-          gap: '1.5rem',
-        }}
-      >
+      <section className="max-w-270 mx-auto px-8 pt-24 pb-20 flex flex-col items-center text-center gap-6">
         {/* Decorative top line */}
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-            opacity: 0,
-            animation: 'fadeUp 0.5s ease 0.1s forwards',
-          }}
+          className="flex items-center gap-[0.6rem]"
+          style={{ opacity: 0, animation: 'fadeUp 0.5s ease 0.1s forwards' }}
         >
-          <span style={{ width: '32px', height: '1px', background: 'var(--accent-mid)' }} />
-          <span
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.72rem',
-              letterSpacing: '0.2em',
-              color: 'var(--accent)',
-              textTransform: 'uppercase',
-            }}
-          >
+          <span className="w-8 h-px bg-accent-mid" />
+          <span className="font-sans text-[0.72rem] tracking-[0.2em] text-accent uppercase">
             Personal Blog
           </span>
-          <span style={{ width: '32px', height: '1px', background: 'var(--accent-mid)' }} />
+          <span className="w-8 h-px bg-accent-mid" />
         </div>
 
         <h1
+          className="font-bold leading-[1.15] tracking-[-0.02em] m-0"
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-            fontWeight: 700,
-            lineHeight: 1.15,
-            letterSpacing: '-0.02em',
-            margin: 0,
             opacity: 0,
             animation: 'fadeUp 0.6s ease 0.2s forwards',
           }}
@@ -62,29 +35,15 @@ export default function Home() {
         </h1>
 
         <p
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '1rem',
-            color: 'var(--accent)',
-            letterSpacing: '0.2em',
-            margin: 0,
-            opacity: 0,
-            animation: 'fadeUp 0.6s ease 0.3s forwards',
-          }}
+          className="font-sans text-base text-accent tracking-[0.2em] m-0"
+          style={{ opacity: 0, animation: 'fadeUp 0.6s ease 0.3s forwards' }}
         >
           Developer · Writer · Explorer
         </p>
 
         <p
-          style={{
-            maxWidth: '480px',
-            fontSize: '1.05rem',
-            color: 'var(--text-muted)',
-            lineHeight: 1.9,
-            margin: 0,
-            opacity: 0,
-            animation: 'fadeUp 0.6s ease 0.4s forwards',
-          }}
+          className="max-w-120 text-[1.05rem] text-text-muted leading-[1.9] m-0"
+          style={{ opacity: 0, animation: 'fadeUp 0.6s ease 0.4s forwards' }}
         >
           用代码描绘世界，用文字记录时光。
           <br />
@@ -92,44 +51,18 @@ export default function Home() {
         </p>
 
         <div
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            marginTop: '0.5rem',
-            opacity: 0,
-            animation: 'fadeUp 0.6s ease 0.5s forwards',
-          }}
+          className="flex gap-4 mt-2"
+          style={{ opacity: 0, animation: 'fadeUp 0.6s ease 0.5s forwards' }}
         >
           <Link
             href="/blog"
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.875rem',
-              letterSpacing: '0.06em',
-              padding: '0.7rem 1.75rem',
-              background: 'var(--accent)',
-              color: 'var(--text-on-accent)',
-              borderRadius: '100px',
-              fontWeight: 500,
-              transition: 'background 0.2s, transform 0.2s',
-            }}
+            className="font-sans text-sm tracking-[0.06em] py-[0.7rem] px-7 bg-accent text-text-on-accent rounded-full font-medium transition-[background,transform] duration-200"
           >
             阅读文章
           </Link>
           <Link
             href="/about"
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.875rem',
-              letterSpacing: '0.06em',
-              padding: '0.7rem 1.75rem',
-              background: 'transparent',
-              color: 'var(--text-muted)',
-              border: '1px solid var(--border)',
-              borderRadius: '100px',
-              fontWeight: 400,
-              transition: 'border-color 0.2s, color 0.2s',
-            }}
+            className="font-sans text-sm tracking-[0.06em] py-[0.7rem] px-7 bg-transparent text-text-muted border border-border rounded-full font-normal transition-[border-color,color] duration-200"
           >
             关于我
           </Link>
@@ -137,62 +70,25 @@ export default function Home() {
       </section>
 
       {/* ── Divider ──────────────────────────────── */}
-      <div
-        style={{
-          maxWidth: '1080px',
-          margin: '0 auto',
-          padding: '0 2rem',
-        }}
-      >
-        <div style={{ borderTop: '1px solid var(--border-light)' }} />
+      <div className="max-w-270 mx-auto px-8">
+        <div className="border-t border-border-light" />
       </div>
 
       {/* ── Featured Posts ───────────────────────── */}
-      <section
-        style={{
-          maxWidth: '1080px',
-          margin: '0 auto',
-          padding: '4rem 2rem',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'baseline',
-            justifyContent: 'space-between',
-            marginBottom: '2rem',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '1.15rem',
-              fontWeight: 600,
-              letterSpacing: '-0.01em',
-              margin: 0,
-            }}
-          >
+      <section className="max-w-270 mx-auto px-8 py-16">
+        <div className="flex items-baseline justify-between mb-8">
+          <h2 className="text-[1.15rem] font-semibold tracking-[-0.01em] m-0">
             精选文章
           </h2>
           <Link
             href="/blog"
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.8rem',
-              color: 'var(--accent)',
-              letterSpacing: '0.04em',
-            }}
+            className="font-sans text-[0.8rem] text-accent tracking-[0.04em]"
           >
             全部文章 →
           </Link>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '1.25rem',
-          }}
-        >
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5">
           {featured.map((post, i) => (
             <div
               key={post.slug}
@@ -208,74 +104,29 @@ export default function Home() {
       </section>
 
       {/* ── Recent Posts ─────────────────────────── */}
-      <section
-        style={{
-          maxWidth: '1080px',
-          margin: '0 auto',
-          padding: '0 2rem 5rem',
-        }}
-      >
-        <h2
-          style={{
-            fontSize: '1.15rem',
-            fontWeight: 600,
-            letterSpacing: '-0.01em',
-            marginBottom: '1.5rem',
-          }}
-        >
+      <section className="max-w-270 mx-auto px-8 pb-20">
+        <h2 className="text-[1.15rem] font-semibold tracking-[-0.01em] mb-6">
           最近更新
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <div className="flex flex-col">
           {recent.map((post, i) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
+              className="flex items-baseline justify-between gap-4 py-[1.1rem] border-b border-border-light transition-colors duration-200"
               style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                gap: '1rem',
-                padding: '1.1rem 0',
-                borderBottom: '1px solid var(--border-light)',
                 opacity: 0,
                 animation: `fadeIn 0.4s ease ${0.08 * i + 0.1}s forwards`,
-                transition: 'color 0.2s',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
-                <span
-                  style={{
-                    width: '6px',
-                    height: '6px',
-                    borderRadius: '50%',
-                    background: 'var(--accent-pale)',
-                    border: '1.5px solid var(--accent-mid)',
-                    flexShrink: 0,
-                  }}
-                />
-                <span
-                  style={{
-                    fontSize: '0.975rem',
-                    fontWeight: 500,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-pale border-[1.5px] border-accent-mid shrink-0" />
+                <span className="text-[0.975rem] font-medium whitespace-nowrap overflow-hidden text-ellipsis">
                   {post.title}
                 </span>
               </div>
-              <span
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.76rem',
-                  color: 'var(--text-light)',
-                  letterSpacing: '0.02em',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                }}
-              >
+              <span className="font-sans text-[0.76rem] text-text-light tracking-[0.02em] whitespace-nowrap shrink-0">
                 {formatDateShort(post.date)}
               </span>
             </Link>

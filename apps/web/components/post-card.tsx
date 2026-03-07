@@ -1,8 +1,8 @@
 'use client'
 
-import Link from 'next/link'
 import type { Post } from '@/lib/blog-data'
-import { formatDateShort, categoryColor, categoryBg } from '@/lib/utils'
+import { categoryBg, categoryColor, formatDateShort } from '@/lib/utils'
+import Link from 'next/link'
 
 interface PostCardProps {
   post: Post
@@ -11,22 +11,9 @@ interface PostCardProps {
 
 export default function PostCard({ post, featured = false }: PostCardProps) {
   return (
-    <Link href={`/blog/${post.slug}`} style={{ display: 'block' }}>
+    <Link href={`/blog/${post.slug}`} className="block">
       <article
-        style={{
-          background: 'var(--bg-card)',
-          border: '1px solid var(--border)',
-          borderRadius: '12px',
-          padding: featured ? '2rem' : '1.5rem',
-          transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
-          cursor: 'pointer',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.75rem',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
+        className={`bg-bg-card border border-border rounded-xl cursor-pointer h-full flex flex-col gap-3 relative overflow-hidden transition-[transform,box-shadow,border-color] duration-250 ${featured ? 'p-8' : 'p-6'}`}
         onMouseEnter={(e) => {
           const el = e.currentTarget
           el.style.transform = 'translateY(-3px)'
@@ -42,118 +29,56 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
       >
         {/* Category indicator */}
         <span
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '3px',
-            height: '100%',
-            background: categoryColor[post.category] ?? 'var(--accent)',
-            borderRadius: '12px 0 0 12px',
-          }}
+          className="absolute top-0 left-0 w-0.75 h-full rounded-[12px_0_0_12px]"
+          style={{ background: categoryColor[post.category] ?? 'var(--accent)' }}
         />
 
         {/* Category + Date */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '0.5rem',
-          }}
-        >
+        <div className="flex items-center justify-between gap-2">
           <span
+            className="font-sans text-[0.7rem] font-medium tracking-[0.08em] py-[0.2rem] px-[0.6rem] rounded-full"
             style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.7rem',
-              fontWeight: 500,
-              letterSpacing: '0.08em',
               color: categoryColor[post.category] ?? 'var(--accent)',
               background: categoryBg[post.category] ?? 'var(--tag-tech)',
-              padding: '0.2rem 0.6rem',
-              borderRadius: '20px',
             }}
           >
             {post.category}
           </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.75rem',
-              color: 'var(--text-light)',
-              letterSpacing: '0.02em',
-            }}
-          >
+          <span className="font-sans text-xs text-text-light tracking-[0.02em]">
             {formatDateShort(post.date)}
           </span>
         </div>
 
         {/* Title */}
-        <h3
-          style={{
-            fontSize: featured ? '1.25rem' : '1.05rem',
-            fontWeight: 600,
-            lineHeight: 1.4,
-            margin: 0,
-            color: 'var(--text)',
-          }}
-        >
+        <h3 className={`${featured ? 'text-xl' : 'text-[1.05rem]'} font-semibold leading-[1.4] m-0 text-text`}>
           {post.title}
         </h3>
 
         {/* Excerpt */}
         <p
+          className="font-sans text-sm text-text-muted leading-[1.75] m-0 flex-1 overflow-hidden"
           style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '0.875rem',
-            color: 'var(--text-muted)',
-            lineHeight: 1.75,
-            margin: 0,
-            flex: 1,
             display: '-webkit-box',
             WebkitLineClamp: featured ? 3 : 2,
             WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
           }}
         >
           {post.excerpt}
         </p>
 
         {/* Footer: tags + reading time */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 'auto',
-            paddingTop: '0.5rem',
-          }}
-        >
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+        <div className="flex items-center justify-between mt-auto pt-2">
+          <div className="flex flex-wrap gap-[0.35rem]">
             {post.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.7rem',
-                  color: 'var(--text-muted)',
-                  background: 'var(--bg-subtle)',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: '4px',
-                  padding: '0.1rem 0.45rem',
-                }}
+                className="font-sans text-[0.7rem] text-text-muted bg-bg-subtle border border-border-light rounded py-[0.1rem] px-[0.45rem]"
               >
                 {tag}
               </span>
             ))}
           </div>
-          <span
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.72rem',
-              color: 'var(--text-light)',
-            }}
-          >
+          <span className="font-sans text-[0.72rem] text-text-light">
             {post.readingTime} 分钟阅读
           </span>
         </div>
