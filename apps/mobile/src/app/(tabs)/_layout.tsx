@@ -3,10 +3,13 @@ import { cn } from '@/lib/utils';
 import { Tabs } from 'expo-router';
 import { Platform, Text, View } from 'react-native';
 
-function TabIcon({ focused, icon }: { focused: boolean; icon: string; label: string }) {
+function TabIcon({ focused, icon, label, color }: { focused: boolean; icon: string; label: string; color: string }) {
   return (
-    <View className="items-center justify-center">
+    <View className='items-center justify-center gap-0.5'>
       <Text className={cn(['text-lg', focused ? 'color-accent' : 'color-text-light'])}>{icon}</Text>
+      {Platform.OS === 'web' && (
+        <Text style={{ color }} className='text-[10px] tracking-[0.5px] font-medium'>{label}</Text>
+      )}
     </View>
   )
 }
@@ -17,7 +20,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: true,
+        tabBarShowLabel: Platform.OS !== 'web',
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: colors.textLight,
         tabBarStyle: {
@@ -40,8 +43,8 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: '首页',
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="◎" label="首页" />
+          tabBarIcon: ({ focused, color }) => (
+            <TabIcon focused={focused} icon="◎" label="首页" color={color} />
           ),
         }}
       />
@@ -49,8 +52,8 @@ export default function TabsLayout() {
         name="blog"
         options={{
           title: '文章',
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="≡" label="文章" />
+          tabBarIcon: ({ focused, color }) => (
+            <TabIcon focused={focused} icon="≡" label="文章" color={color} />
           ),
         }}
       />
@@ -58,8 +61,8 @@ export default function TabsLayout() {
         name="about"
         options={{
           title: '关于',
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon="○" label="关于" />
+          tabBarIcon: ({ focused, color }) => (
+            <TabIcon focused={focused} icon="○" label="关于" color={color} />
           ),
         }}
       />
