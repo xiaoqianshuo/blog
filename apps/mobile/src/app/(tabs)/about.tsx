@@ -42,36 +42,32 @@ export default function AboutScreen() {
       </Animated.View>
 
       {/* Profile card */}
-      <Animated.View
-        entering={FadeInDown.delay(80).springify().damping(18)}
-        className="rounded-2xl border border-border bg-bg-card p-6 items-center mb-4"
-      >
-        <View className="w-[72px] h-[72px] rounded-full border-2 border-accent-mid bg-accent-pale items-center justify-center mb-3">
-          <Text className='text-[32px]'>🌿</Text>
+      <Animated.View entering={FadeInDown.delay(80).springify().damping(18)} className="mb-4">
+        <View className="rounded-2xl border border-border bg-bg-card p-6 items-center">
+          <View className="w-[72px] h-[72px] rounded-full border-2 border-accent-mid bg-accent-pale items-center justify-center mb-3">
+            <Text className='text-[32px]'>🌿</Text>
+          </View>
+          <Text style={{ fontFamily: fonts.serif }} className="text-[22px] font-bold mb-1 text-text-primary">
+            晓千烁
+          </Text>
+          <Text className="text-xs tracking-[1.5px] mb-4 text-accent">Developer &amp; Writer</Text>
+          <Text style={{ fontFamily: fonts.serif }} className="text-sm leading-[22px] text-center text-text-muted">
+            你好，我是晓千烁，一名前端开发者，同时也是个业余写作者。{'\n\n'}
+            我相信好的代码和好的文章在本质上是相通的：都需要清晰的思维、精准的表达，以及对细节的持续打磨。{'\n\n'}
+            平时喜欢骑行、摄影和读书。骑行让我在运动中清空大脑，摄影训练我的观察力，读书则是我和不同时代的人对话的方式。
+          </Text>
         </View>
-        <Text style={{ fontFamily: fonts.serif }} className="text-[22px] font-bold mb-1 text-text-primary">
-          晓千烁
-        </Text>
-        <Text className="text-xs tracking-[1.5px] mb-4 text-accent">Developer &amp; Writer</Text>
-        <Text style={{ fontFamily: fonts.serif }} className="text-sm leading-[22px] text-center text-text-muted">
-          你好，我是晓千烁，一名前端开发者，同时也是个业余写作者。{'\n\n'}
-          我相信好的代码和好的文章在本质上是相通的：都需要清晰的思维、精准的表达，以及对细节的持续打磨。{'\n\n'}
-          平时喜欢骑行、摄影和读书。骑行让我在运动中清空大脑，摄影训练我的观察力，读书则是我和不同时代的人对话的方式。
-        </Text>
       </Animated.View>
 
       {/* Quote */}
-      <Animated.View
-        entering={FadeInDown.delay(160).springify().damping(18)}
-        className="flex-row rounded-xl bg-bg-subtle p-4 mb-5 gap-3"
-      >
-        <View className="w-[3px] rounded-sm bg-accent-pale" />
-        <Text style={{ fontFamily: fonts.serif }} className="flex-1 text-sm leading-[22px] italic text-text-muted">
-          「时间是最好的编辑，{'\n'}　而写作是最诚实的自我审视。」
-        </Text>
+      <Animated.View entering={FadeInDown.delay(160).springify().damping(18)} className="mb-5">
+        <View className="flex-row rounded-xl bg-bg-subtle p-4 gap-3">
+          <View className="w-[3px] rounded-sm bg-accent-pale" />
+          <Text style={{ fontFamily: fonts.serif }} className="flex-1 text-sm leading-[22px] italic text-text-muted">
+            「时间是最好的编辑，{'\n'}　而写作是最诚实的自我审视。」
+          </Text>
+        </View>
       </Animated.View>
-
-      {/* Skills */}
       {skills.map((group, gi) => (
         <Animated.View
           key={group.label}
