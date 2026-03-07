@@ -1,34 +1,57 @@
 import { ExpoConfig } from 'expo/config';
 import packageJson from './package.json';
 
+const variant = process.env.APP_VARIANT ?? 'production';
+const isDev = variant === 'development';
+const isPreview = variant === 'preview';
+
+const appName = isDev ? '小黑屋 Dev' : isPreview ? '小黑屋 Preview' : '晓千烁的小黑屋';
+
+const bundleId = isDev
+  ? 'work.qlqs.blog.dev'
+  : isPreview
+    ? 'work.qlqs.blog.preview'
+    : 'work.qlqs.blog';
+
 const config: ExpoConfig = {
-  name: '晓千烁的小黑屋',
+  name: appName,
   slug: 'blog',
   version: packageJson.version,
   orientation: 'default',
-  icon: './assets/images/icon.png',
+  icon: isDev
+    ? './assets/images/icon-dark.png' // 用深色图标方便区分开发包
+    : './assets/images/icon.png',
   scheme: 'blog',
   userInterfaceStyle: 'automatic',
   ios: {
-    icon: {
-      light: './assets/images/icon.png',
-      dark: './assets/images/icon-dark.png',
-      tinted: './assets/images/icon-tinted.png',
-    },
-    bundleIdentifier: 'work.qlqs.blog',
+    icon: isDev
+      ? {
+          light: './assets/images/icon-dark.png',
+          dark: './assets/images/icon-dark.png',
+          tinted: './assets/images/icon-tinted.png',
+        }
+      : {
+          light: './assets/images/icon.png',
+          dark: './assets/images/icon-dark.png',
+          tinted: './assets/images/icon-tinted.png',
+        },
+    bundleIdentifier: bundleId,
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
     },
   },
   android: {
-    package: 'work.qlqs.blog',
+    package: bundleId,
     permissions: [],
-    adaptiveIcon: {
-      backgroundColor: '#74C0FF',
-      foregroundImage: './assets/images/android-icon-foreground.png',
-      backgroundImage: './assets/images/android-icon-background.png',
-      monochromeImage: './assets/images/android-icon-monochrome.png',
-    },
+    icon: isDev ? './assets/images/icon-dark.png' : './assets/images/icon.png',
+    adaptiveIcon: isDev
+      ? undefined
+      : {
+          backgroundColor: '#74C0FF',
+          foregroundImage: './assets/images/android-icon-foreground.png',
+          backgroundImage: './assets/images/android-icon-background.png',
+          monochromeImage: './assets/images/android-icon-monochrome.png',
+        },
     predictiveBackGestureEnabled: false,
   },
   web: {
@@ -58,6 +81,7 @@ const config: ExpoConfig = {
     reactCompiler: true,
   },
   extra: {
+    appVariant: variant,
     router: {},
     eas: {
       projectId: 'fc8d6501-d05d-40e6-af69-383df7b0dd0f',
