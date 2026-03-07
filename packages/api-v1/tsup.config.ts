@@ -9,6 +9,6 @@ export default defineConfig({
   clean: true,
   external: ['zod'],
   define: {
-    'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+    'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL ?? 'http://localhost:3000/api'),
   },
 });

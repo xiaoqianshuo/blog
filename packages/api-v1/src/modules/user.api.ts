@@ -31,4 +31,4 @@ export class UserApi extends BaseApi implements IUserApi {
   }
 }
 
-export const userApi = new UserApi(process.env.API_BASE_URL);
+export const userApi = new UserApi(process.env.BASE_URL);

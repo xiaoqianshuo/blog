@@ -162,6 +162,11 @@ const groupThrottle = <K, Args extends unknown[]>(
     }
   }, maxIdle);
 
+  // Node.js 环境：不让定时器阻止进程自然退出
+  if (typeof (cleanupInterval as unknown as NodeJS.Timeout).unref === 'function') {
+    (cleanupInterval as unknown as NodeJS.Timeout).unref();
+  }
+
   if (getRuntimeEnv() === 'browser') {
     window.addEventListener('beforeunload', () => clearInterval(cleanupInterval));
   }
@@ -211,6 +216,11 @@ const groupThrottleAsync = <K, Args extends unknown[], R = void>(
       }
     }
   }, maxIdle);
+
+  // Node.js 环境：不让定时器阻止进程自然退出
+  if (typeof (cleanupInterval as unknown as NodeJS.Timeout).unref === 'function') {
+    (cleanupInterval as unknown as NodeJS.Timeout).unref();
+  }
 
   if (getRuntimeEnv() === 'browser') {
     window.addEventListener('beforeunload', () => clearInterval(cleanupInterval));

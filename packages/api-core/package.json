@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "@xiaoqianshuo/utils": "workspace:^",
-    "reflect-metadata": "0.2.2",
     "zod": "^4.3.5"
   },
   "devDependencies": {

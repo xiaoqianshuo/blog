@@ -17,9 +17,11 @@ export class FetchRequestAdapter extends RequestAdapter {
       },
     );
     if (response.ok) {
-      return response.json();
+      const text = await response.text();
+      return text ? JSON.parse(text) : (undefined as T);
     }
-    throw new Error(response.statusText);
+    const errorText = await response.text().catch(() => response.statusText);
+    throw new Error(`${response.status} ${response.statusText}: ${errorText}`);
   }
 }
 
