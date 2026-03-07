@@ -1,14 +1,16 @@
-import BlogFilter from '@/components/blog-filter'
-import { getAllTags, posts } from '@/lib/blog-data'
-import type { Metadata } from 'next'
+import BlogFilter from '@/components/blog-filter';
+import { postApi } from '@xiaoqianshuo/api-v1';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '文章',
   description: '所有文章列表',
 }
 
-export default function BlogPage() {
-  const allTags = getAllTags()
+export default async function BlogPage() {
+
+  const posts = await postApi.listPosts();
+  const allTags = await postApi.getAllTags()
 
   return (
     <div className="max-w-270 mx-auto px-8 pt-16 pb-24">

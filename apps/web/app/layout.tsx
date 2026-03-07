@@ -1,9 +1,9 @@
+import Footer from '@/components/footer'
+import Nav from '@/components/nav'
+import { ThemeProvider, type Mode, type Theme } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import { Lora } from 'next/font/google'
 import { cookies } from 'next/headers'
-import Nav from '@/components/nav'
-import Footer from '@/components/footer'
-import { ThemeProvider, type Theme, type Mode } from '@/components/theme-provider'
 import './globals.css'
 
 const lora = Lora({
@@ -35,7 +35,7 @@ export default async function RootLayout({
   const mode  = (VALID_MODES.includes(rawMode   as Mode)  ? rawMode  : 'auto') as Mode
 
   return (
-    <html lang="zh-CN" className={lora.variable} data-theme={theme} data-scheme="light" data-mode={mode} suppressHydrationWarning>
+    <html lang="zh-CN" className={lora.variable} data-theme={theme} data-scheme="light" data-mode={mode} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         {/* Resolve 'auto' mode → actual dark/light scheme before first paint */}
         <script dangerouslySetInnerHTML={{ __html: `

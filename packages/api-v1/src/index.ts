@@ -1,9 +1,9 @@
 import { generateApiClient } from '@xiaoqianshuo/api-core';
-import { UserApi } from './modules/user.api';
+import { PostApi } from './modules/post.api';
 
-export const { user: userApi } = generateApiClient({
+export const { post: postApi } = generateApiClient({
   baseUrl: process.env.BASE_URL,
   apis: {
-    user: UserApi,
+    post: PostApi,
   },
 });

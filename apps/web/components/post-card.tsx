@@ -1,6 +1,6 @@
 'use client'
 
-import type { Post } from '@/lib/blog-data'
+import type { Post } from '@xiaoqianshuo/types'
 import { categoryBg, categoryColor, formatDateShort } from '@/lib/utils'
 import Link from 'next/link'
 

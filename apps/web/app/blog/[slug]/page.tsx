@@ -1,6 +1,6 @@
 import ReadingProgress from '@/components/reading-progress'
-import { getPostBySlug, posts } from '@/lib/blog-data'
 import { categoryBg, categoryColor, formatDate } from '@/lib/utils'
+import { postApi } from '@xiaoqianshuo/api-v1'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -10,12 +10,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
+  const posts = await postApi.listPosts()
   return posts.map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await postApi.getPost(slug);
   if (!post) return {}
   return {
     title: post.title,
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await postApi.getPost(slug);
   if (!post) notFound()
 
   return (

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import PostCard from './post-card'
-import type { Post } from '@/lib/blog-data'
+import type { Post } from '@xiaoqianshuo/types'
 
 const categories = ['全部', '技术', '生活', '随笔'] as const
 type Category = typeof categories[number]

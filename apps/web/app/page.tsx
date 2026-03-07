@@ -1,11 +1,13 @@
 import PostCard from '@/components/post-card'
-import { getFeaturedPosts, getRecentPosts } from '@/lib/blog-data'
+import { postApi } from '@xiaoqianshuo/api-v1'
 import { formatDateShort } from '@/lib/utils'
 import Link from 'next/link'
 
-export default function Home() {
-  const featured = getFeaturedPosts()
-  const recent = getRecentPosts(4)
+export default async function Home() {
+  const [featured, recent] = await Promise.all([
+    postApi.getFeaturedPosts(),
+    postApi.getRecentPosts(4),
+  ])
 
   return (
     <div>
