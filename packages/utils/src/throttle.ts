@@ -117,7 +117,6 @@ const throttleAsync = <Args extends unknown[], R = void>(
       const remaining = wait - (now - lastTime);
 
       if (remaining <= 0) {
-        callFn();
         if (timer) {
           clearTimeout(timer);
           timer = null;
